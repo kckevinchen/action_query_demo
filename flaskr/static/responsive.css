@@ -121,8 +121,7 @@
     border-radius: 5px;
     padding: 20px;
     position: relative;
-    display: block;
-    float:left;
+    display: inline-block;
 }
 .elliptical-item {
     display: inline-block;
