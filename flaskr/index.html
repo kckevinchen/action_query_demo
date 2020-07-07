@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Interaction Queries Demo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--<link rel="stylesheet" href="static/maxcdn.css">-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="static/4.7.0/css/font-awesome.min.css">-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <!--<link rel="stylesheet" href="static/DGraph.css">-->
+    <!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">-->
+    <!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">-->
+    <!--    <script src="https://d3js.org/d3.v3.min.js"></script>-->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <!--    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+    <link rel="stylesheet" href="static/roboto.css" />
+    <link rel="stylesheet" href="static/color.css" />
+    <link rel="stylesheet" href="static/montserrat.css" />
+    <!-- <script src="static/d3.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/jquery-ui.js"></script> -->
+    <link rel="stylesheet" href="static/w3.css" />
+    <link rel="stylesheet" href="static/modal.css" />
+    <link rel="stylesheet" href="static/responsive.css" />
+    <!-- <script type="text/javascript" src="static/box.js"></script> -->
+
+    <!-- <script src="static/chart.js"></script> -->
+    <!-- <script type="text/javascript" src="static/accuracy.js"></script>
+    <script type="text/javascript" src="static/accuracy_bar.js"></script>
+    <script type="text/javascript" src="static/index.js"></script>
+    <script type="text/javascript" src="static/video.js"></script>
+    <script type="text/javascript" src="static/time.js"></script>
+    <script type="text/javascript" src="static/utils.js"></script>
+    <script type="text/javascript" src="static/time_performance.js"></script>
+    <script type="text/javascript" src="static/accuracy_pie.js"></script> -->
+  </head>
+
+  <body
+    class="w3-content"
+    style="max-width: 2000px; background-color: #d0cccc;"
+  >
+    <!-- Modal -->
+    <div
+      class="modal fade w3-animate-opacity"
+      id="exampleModalLong"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLongTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" style="width: 40%;">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>
+              <b><span style="font-size: medium;">Class selection</span></b>
+            </p>
+            <div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+              <div class="col-md-12">
+                <form>
+                  <label id="isCar1" style="margin-right: 10px;">
+                    <input
+                      id="isCar"
+                      type="checkbox"
+                      name="modal_checkbox"
+                      value="Car"
+                    />Car
+                  </label>
+                  <label id="isTruck1" style="margin-right: 10px;">
+                    <input
+                      id="isTruck"
+                      type="checkbox"
+                      name="modal_checkbox"
+                      value="Truck"
+                    />Truck
+                  </label>
+                  <label id="isPerson1" style="margin-right: 10px;">
+                    <input
+                      id="isPerson"
+                      type="checkbox"
+                      name="modal_checkbox"
+                      value="Person"
+                    />Person
+                  </label>
+                  <label id="isBus1" style="margin-right: 10px;">
+                    <input
+                      id="isBus"
+                      type="checkbox"
+                      name="modal_checkbox"
+                      value="Bus"
+                    />Bus
+                  </label>
+                  <label id="isHuman1" style="margin-right: 10px;">
+                    <input
+                      id="isHuman"
+                      type="checkbox"
+                      name="modal_checkbox"
+                      value="Human"
+                    />Human
+                  </label>
+                  <label id="isObject1" style="margin-right: 10px;">
+                    <input
+                      id="isObject"
+                      type="checkbox"
+                      name="modal_checkbox"
+                      value="Object"
+                    />Object
+                  </label>
+                </form>
+              </div>
+            </div>
+            <p>
+              <b><span style="font-size: medium;">Predicate List</span></b>
+            </p>
+            <div class="row" style="margin-left: 5px;">
+              <table class="table table-striped" style="margin-top: 10px;">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Predicates</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th id="row1" scope="row" style="display: none;">1</th>
+                    <td id="row_val1" style="display: none;">X</td>
+                  </tr>
+                  <tr>
+                    <th id="row2" scope="row" style="display: none;">2</th>
+                    <td id="row_val2" style="display: none;">X</td>
+                  </tr>
+                  <tr>
+                    <th id="row3" scope="row" style="display: none;">3</th>
+                    <td id="row_val3" style="display: none;">X</td>
+                  </tr>
+                  <tr>
+                    <th id="row4" scope="row" style="display: none;">4</th>
+                    <td id="row_val4" style="display: none;">X</td>
+                  </tr>
+                  <tr>
+                    <th id="row5" scope="row" style="display: none;">5</th>
+                    <td id="row_val5" style="display: none;">X</td>
+                  </tr>
+                  <tr>
+                    <th id="row6" scope="row" style="display: none;">6</th>
+                    <td id="row_val6" style="display: none;">X</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="modal_button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" id="save" class="btn btn-primary">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:400px" id="mySidebar">-->
+    <nav
+      class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top"
+      style="z-index: 3; margin-left: 1%; width: 24%;"
+      id="mySidebar"
+    >
+      <div class="w3-container w3-display-container w3-padding-16">
+        <h2 class="w3-wide" style="letter-spacing: 4px;">
+          SVQ++: Action Queries Demo
+        </h2>
+      </div>
+
+
+
+
+
+      <div class="w3-large w3-text-grey" style="margin: 1% 1% 10% 1%;">
+        <a
+          onclick="myAccFunc()"
+          href="javascript:window.location.reload();"
+          class="w3-button w3-block w3-blue w3-left-align"
+        >
+          <b>Online Model</b> <i class="fa fa-caret-down"></i>
+        </a>
+        <br />
+        <a
+          onclick="myAccFunc()"
+          href="./architecture.html"
+          class="w3-button w3-block w3-blue w3-left-align"
+        >
+          <b>Offline Model</b> <i class="fa fa-caret-down"></i>
+        </a>
+        <br />
+        <a
+          onclick="myAccFunc()"
+          href="./video.html"
+          class="w3-button w3-block w3-blue w3-left-align"
+        >
+          <b>Demo Video</b> <i class="fa fa-caret-down"></i>
+        </a>
+        <br />
+
+        <a
+          onclick="myAccFunc()"
+          href="./video.html"
+          class="w3-button w3-block w3-blue w3-left-align"
+        >
+          <b>Architecture</b> <i class="fa fa-caret-down"></i>
+        </a>
+      </div>
+
+      <div class="w3-container w3-padding-32" style="margin: 0% 1% 0% 10%;">
+        <!--<i class="fa fa-fw fa-envelope"></i> Email: <br>-->
+        <a href="https://www.utoronto.ca/">
+          <img src="./static/icons/logo.png" style="width: 50%;" />
+        </a>
+
+        <div style="margin: 10px 0 0 0;">
+          <span style="font-family: sans-serif; font-size: large;">
+            <a href="mailto:drchao@cs.toronto.edu">Get in Touch</a>
+          </span>
+          <br />
+          <span style="font-family: sans-serif; font-size: large;">
+            <a href="http://www.cs.toronto.edu/~xarchakos/svq.html"
+              >Link to SVQ</a
+            >
+          </span>
+        </div>
+      </div>
+    </nav>
+
+
+
+
+    <div class="w3-main" style="margin-left: 25.5%; margin-right: 1%;">
+        <div class="w3-row-padding w3-padding-16">
+            <div class="operation-penal  w3-white"
+            style="margin: 0% 5% 0% 5%; width: 89%"
+          >
+          <div style="float: left;">
+            <p>
+                <b
+                  ><span style="font-size: small;"
+                    >1. Select Video Source</span
+                  ></b
+                >
+              </p>
+              <div class="w3-container" id="radio_data">
+                <div class="w3-half">
+                  <input
+                    type="radio"
+                    id="det"
+                    name="project"
+                    value="Tennis Clip"
+                  />
+                  <label for="det">Tennis</label>
+                </div>
+                <div class="w3-half">
+                    <input
+                      type="radio"
+                      id="squ"
+                      name="project"
+                      value="Baseball Clip"
+                    />
+                    <label for="squ">Baseball</label>
+                  </div>
+
+                  <div class="w3-half">
+                    <input
+                      type="radio"
+                      id="sur"
+                      name="project"
+                      value="Surfing Clip"
+                    />
+                    <label for="sur">Surfing</label>
+                  </div>
+                  <div class="w3-half">
+                    <input
+                      type="radio"
+                      id="ska"
+                      name="project"
+                      value="Skate Clip"
+                    />
+                    <label for="ska">Skate</label>
+                  </div>
+            </div>
+        </div>
+
+
+
+          <div style="float: left;"> <p>
+                <b
+                  ><span style="font-size: small;"
+                    >1. Select Video Source</span
+                  ></b
+                >
+              </p></div>
+          <div style="float: left;">HAHA</div>
+          </div>
+        </div>
+            
+
+
+
+
+          <!-- <div class="operation-penal w3-panel  w3-white"
+            style="margin: 0% 5% 0% 5%; width: 89%"
+          >
+            <label class="operation-penal-label" style="font-size: medium;"
+              ><b>Query Definition</b></label
+            >
+
+
+            <div class="w3-col" style=" float: left;">
+            <p>
+              <b
+                ><span style="font-size: small;"
+                  >1. Select Video Source</span
+                ></b
+              >
+            </p>
+            <div class="w3-container" id="radio_data">
+              <div class="w3-half">
+                <input
+                  type="radio"
+                  id="det"
+                  name="project"
+                  value="Tennis Clip"
+                />
+                <label for="det">Tennis</label>
+              </div>
+              <div class="w3-half">
+                <input
+                  type="radio"
+                  id="squ"
+                  name="project"
+                  value="Baseball Clip"
+                />
+                <label for="squ">Baseball</label>
+              </div>
+              <div class="w3-half">
+                <input
+                  type="radio"
+                  id="sur"
+                  name="project"
+                  value="Surfing Clip"
+                />
+                <label for="sur">Surfing</label>
+              </div>
+              <div class="w3-half">
+                <input
+                  type="radio"
+                  id="ska"
+                  name="project"
+                  value="Skate Clip"
+                />
+                <label for="ska">Skate</label>
+              </div>
+            </div>
+        </div>
+
+
+        <div class="w3-col" style=" float: left;">
+            <p>
+              <b><span style="font-size: small;">2. Select Metric</span></b>
+            </p>
+            <div class="w3-container" id="radio_video">
+              <div class="w3-half">
+                <input
+                  type="radio"
+                  id="normal"
+                  name="mode"
+                  value="Normal mode"
+                />
+                <label for="normal">Normal Mode</label>
+              </div>
+              <div class="">
+                <input type="radio" id="slow" name="mode" value="Slow mode" />
+                <label for="slow">Slow Mode</label>
+              </div>
+            </div>
+        </div>
+
+
+
+
+        
+            <p>
+              <b><span style="font-size: small;">3. Select Predicate</span></b>
+            </p>
+            <div
+              class="w3-container w3-row-padding"
+              id="radio"
+              style="padding: 0 0 0 2.5%;"
+            >
+              <div class="w3-col m3" id="cou_label">
+                <input type="radio" id="cou" name="project1" value="Count" />
+                <label for="cou" id="cou1"> Count </label>
+              </div>
+              <div class="w3-col m5" id="cls_label">
+                <input
+                  type="radio"
+                  id="cls"
+                  name="project1"
+                  value="Class count"
+                />
+                <label for="cls" id="cls1"> Class count </label>
+              </div>
+              <div class="w3-col m5" id="loc_label">
+                <input
+                  type="radio"
+                  id="loc"
+                  name="project1"
+                  value="Localisation"
+                />
+                <label for="loc" id="loc1"> Localisation </label>
+              </div>
+              <div class="w3-col m5" id="act_label">
+                <input type="radio" id="act" name="project1" value="Action" />
+                <label for="act"> Interaction </label>
+              </div>
+              <div class="w3-container" style="margin: 5% 0 1% 20%;">
+                <button
+                  id="predicates_button"
+                  type="button"
+                  class="w3-button hover"
+                  data-toggle="modal"
+                  data-target="#exampleModalLong"
+                  style="
+                    visibility: visible;
+                    color: #fff;
+                    background-color: #31708f;
+                    border-color: #2e6da4;
+                  "
+                >
+                  Select Predicates
+                </button>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      First Grid -->
+      <!-- <div class="w3-row-padding w3-padding-16"> -->
+        <!--        <div class="w3-col m3 w3-container w3-margin-bottom" style="width:23%">-->
+        <!--            &lt;!&ndash;<img src="/" alt="" style="width:100%" class="w3-hover-opacity">&ndash;&gt;-->
+        <!--            <div class="w3-container w3-white" style="height:179px">-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+        <!--        <div class="w3-third w3-container w3-margin-bottom" style="width:30%">-->
+        <!--            <div class="w3-container w3-white" style="height:179px">-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+          <!-- <div class="w3-container w3-white" style="height: 170px;">
+            <div>
+              <b><span style="font-size: medium;">SQL Query</span></b>
+            </div>
+            <div
+              class="w3-container"
+              style="padding-top: 1.5%; padding-bottom: 2.5%; "
+            >
+                <div class="w3-container"  id="sql_div" style="padding-right: 0;">
+                  <textarea
+                    readonly
+                    class="w3-codespan"
+                    id="sql_text"
+                    rows="7"
+                    style="width: 95%; font-size: 11px;"
+                  ></textarea>
+                </div>
+            </div>
+          </div>
+        </div> -->
+
+      <!-- Second Row -->
+      <div class="w3-row-padding w3-padding-16" style="height: 350px;">
+        <div class="w3-third w3-margin-bottom" style="height: 100%;">
+          <ul class="w3-ul w3-border w3-white w3-center" style="height: 100%;">
+            <li class="w3-black w3-large">Optimization Mode</li>
+            <li class="w3-padding-16" style="height: 85%;">
+              <video
+                id="tennis_opt_slow"
+                style="max-width: 100%; max-height: 100%;"
+                onplaying="tennisOptSlowUpdateLink()"
+                controls
+              >
+                <source
+                  src="./static/videos/tennis_boxes_opt_normal.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video
+                id="baseball_opt_slow"
+                style="max-width: 100%; max-height: 100%;"
+                onplaying="baseballOptSlowUpdateLink()"
+                controls
+              >
+                <source
+                  src="./static/videos/baseball_boxes_opt_normal.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video
+                id="surfing_opt_slow"
+                style="max-width: 100%; max-height: 100%;"
+                onplaying="surfingOptSlowUpdateLink()"
+                controls
+              >
+                <source
+                  src="./static/videos/surf_opt_25fps.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video
+                id="skate_opt_slow"
+                style="max-width: 100%; max-height: 100%;"
+                onplaying="skateOptSlowUpdateLink()"
+                controls
+              >
+                <source
+                  src="./static/videos/skate_opt_25fps.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video
+                id="tennis_opt"
+                style="max-width: 100%; max-height: 100%;"
+                onplaying="tennisOptUpdateLink()"
+                controls
+              >
+                <source
+                  src="./static/videos/tennis_boxes_opt_55fps.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video
+                id="baseball_opt"
+                style="max-width: 100%; max-height: 100%;"
+                onplaying="baseballOptUpdateLink()"
+                controls
+              >
+                <source
+                  src="./static/videos/baseball_boxes_opt_55fps.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video
+                id="surfing_opt"
+                style="max-width: 100%; max-height: 100%;"
+                onplaying="surfingOptUpdateLink()"
+                controls
+              >
+                <source
+                  src="./static/videos/surf_opt_55fps.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video
+                id="skate_opt"
+                style="max-width: 100%; max-height: 100%;"
+                onplaying="skateOptUpdateLink()"
+                controls
+              >
+                <source
+                  src="./static/videos/skate_opt_55fps.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </li>
+          </ul>
+        </div>
+
+        <div class="w3-third w3-margin-bottom" style="height: 100%;">
+          <ul class="w3-ul w3-light-grey w3-center" style="height: 100%;">
+            <li class="w3-teal w3-large table-cell">Accuracy</li>
+            <li class="w3-padding-4 w3-left-align" style="min-height: 100px;">
+              <div id="my_dataviz"></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="w3-third w3-margin-bottom" style="height: 100%;">
+          <ul class="w3-ul w3-light-grey w3-center" style="height: 100%;">
+            <li class="w3-red w3-large table-cell">Performance</li>
+            <li
+              class="w3-light-grey w3-padding-0 w3-center-align"
+              style="min-height: 100px;"
+            >
+              <div id="time"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+    <!-- <script src="static/jquery.js"></script>
+    <script src="static/jquery-ui.js"></script>
+    <script src="static/chart.js"></script>
+
+    <!-- <script src="static/architecture.js"></script>
+    <script type="text/javascript" src="static/utils.js"></script>
+    <script type="text/javascript" src="static/time_performance.js"></script>
+    <script type="text/javascript" src="static/accuracy_pie.js"></script>
+    <script type="text/javascript" src="static/accuracy.js"></script>
+    <script type="text/javascript" src="static/box.js"></script>  -->
+  </body>
+</html>

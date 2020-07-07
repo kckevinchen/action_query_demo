@@ -1,0 +1,5 @@
+metric,value
+F1,0.93
+TPR,0.96
+FPR,0.02
+PRE,0.95
