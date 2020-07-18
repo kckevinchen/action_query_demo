@@ -32,4 +32,4 @@ def hello():
 
 
 if __name__ == '__main__':
-    socket_io.run(app, port=5099, debug=True)
+    app.run(debug=True)

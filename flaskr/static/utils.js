@@ -201,22 +201,22 @@ function change_class_visibility_modal(val) {
     }
 }
 
-function queries_per_filter_predicates(val, inputVideo, map) {
-    if (val == "count") {
+function queries_per_filter_predicates(val, inputVideo, action,classes) {
+    // if (val == "count") {
         query = "SELECT cameraID, count(frameID), C1(F1(vehBox1)) AS vehType1, C3(F3(SignBox1)) AS SignType2, C2(F2(vehBox1)) AS vehColor FROM (PROCESS " + inputVideo + " PRODUCE cameraID, frameID, vehBox1 USING VehDetector, SignBox1 USING SignDetector) WINDOW HOPING (SIZE 5000, ADVANCE BY 5000)";
-    } else if (val == 'localisation' && map != 0) {
-        map.forEach(function (item, key, mapObj) {
-            query = "SELECT cameraID, frameID, C1(F1(vehBox1)) AS vehType1, C3(F3(SignBox1)) AS SignType2, C2(F2(vehBox1)) AS vehColor FROM (PROCESS " + inputVideo + " PRODUCE cameraID, frameID, vehBox1 USING VehDetector, SignBox1 USING SignDetector) WHERE " + key + " WINDOW HOPING (SIZE 5000, ADVANCE BY 5000)";
-        });
-    } else if (val == 'class count' && map != 0) {
-        map.forEach(function (item, key, mapObj) {
-            query = "SELECT cameraID, frameID, C1(F1(vehBox1)) AS vehType1, C3(F3(SignBox1)) AS SignType2, C2(F2(vehBox1)) AS vehColor FROM (PROCESS " + inputVideo + " PRODUCE cameraID, frameID, vehBox1 USING VehDetector, SignBox1 USING SignDetector) WHERE " + key + " WINDOW HOPING (SIZE 5000, ADVANCE BY 5000)";
-        });
-    } else if (val == 'action' && map != 0) {
-        map.forEach(function (item, key, mapObj) {
-            var res = key.split(" ");
-            query = "SELECT " + "cameraID, frameID, C1(F1(HumanBox1)) AS HumanType1, C2(F2(BallBox1)) AS BallType1 FROM (PROCESS " + inputVideo + " PRODUCE cameraID, frameID, HumanBox1 USING HumanDetector, BallBox1 USING BallDetector) WHERE HumanType1 = " + res[0] + " AND BallType1 = " + res[2] + " AND INTERACTION(HumanType1, BallType1) = " + res[1];
-        });
-    }
+    // } else if (val == 'localisation' && map != 0) {
+    //     map.forEach(function (item, key, mapObj) {
+    //         query = "SELECT cameraID, frameID, C1(F1(vehBox1)) AS vehType1, C3(F3(SignBox1)) AS SignType2, C2(F2(vehBox1)) AS vehColor FROM (PROCESS " + inputVideo + " PRODUCE cameraID, frameID, vehBox1 USING VehDetector, SignBox1 USING SignDetector) WHERE " + key + " WINDOW HOPING (SIZE 5000, ADVANCE BY 5000)";
+    //     });
+    // } else if (val == 'class count' && map != 0) {
+    //     map.forEach(function (item, key, mapObj) {
+    //         query = "SELECT cameraID, frameID, C1(F1(vehBox1)) AS vehType1, C3(F3(SignBox1)) AS SignType2, C2(F2(vehBox1)) AS vehColor FROM (PROCESS " + inputVideo + " PRODUCE cameraID, frameID, vehBox1 USING VehDetector, SignBox1 USING SignDetector) WHERE " + key + " WINDOW HOPING (SIZE 5000, ADVANCE BY 5000)";
+    //     });
+    // } else if (val == 'action' && map != 0) {
+    //     map.forEach(function (item, key, mapObj) {
+    //         var res = key.split(" ");
+    //         query = "SELECT " + "cameraID, frameID, C1(F1(HumanBox1)) AS HumanType1, C2(F2(BallBox1)) AS BallType1 FROM (PROCESS " + inputVideo + " PRODUCE cameraID, frameID, HumanBox1 USING HumanDetector, BallBox1 USING BallDetector) WHERE HumanType1 = " + res[0] + " AND BallType1 = " + res[2] + " AND INTERACTION(HumanType1, BallType1) = " + res[1];
+    //     });
+    // }
     return query;
 }
