@@ -12,31 +12,58 @@ $(function () {
         predicates,
         action,
         classes; // human KICK smallBall
+    var parameters = {"p":0,"window":0,"iou": 0};
     var modal = document.getElementById("exampleModalLong");
+    var param = document.getElementById("parametersLong");
+
+    var iou_slider = document.getElementById("IoU");
+    var iou_output = document.getElementById("IoU_text");
+    parameters["iou"] = iou_slider.value;
+    iou_output.innerHTML = iou_slider.value; // Display the default slider value
+    iou_slider.oninput = function() {
+        iou_output.innerHTML = this.value;
+    }
+
+    var p_slider = document.getElementById("select_p");
+    var p_output = document.getElementById("select_p_text");
+    parameters["p"] = p_slider.value;
+    p_output.innerHTML = p_slider.value; // Display the default slider value
+    p_slider.oninput = function() {
+        p_output.innerHTML = this.value;
+    }
+
+
+
+    var window_slider = document.getElementById("window_size");
+    var window_output = document.getElementById("window_size_text");
+    parameters["window"] = window_slider.value;
+    window_output.innerHTML = window_slider.value; // Display the default slider value
+    window_slider.oninput = function() {
+        window_output.innerHTML = this.value;
+    }
 
     var washingDishesVideo = document.getElementById("washingDishesVideo");
-
     $("#radio").controlgroup();
     $("#radio_data").controlgroup();
     $("#radio_mode").controlgroup();
     $("#selectable").selectable();
 
     // init selection
-    $("#knife1").css("display", "none");
-    $("#faucet1").css("display", "none");
-    $('#washingDishes1').css("display", "none");
+    $(".modal_select").css("display", "none");
 
     // init video
     $("#washingDishesVideo").css("display", "none");
 
     // init performance
     $("#my_dataviz").css("display", "none");
+    $(".slidecontainer").css("display", "none");
 
 
     // change part 3 with respect to part 1
     $('input[name="project"]').change(function () {
         inputVideo = $('input[name="project"]:checked').val().toLowerCase();
         if (inputVideo == "washingdishesclip") {
+            $("#washingDishes").css("display", "inline");
             $("#washingDishes1").css("display", "inline");
         }
     });
@@ -58,18 +85,34 @@ $(function () {
     $('#predicates_button').bind('click', function () {
         if (inputVideo && videoMode) {
             modal.style.display = "block";
-            $('#exampleModalLong input').each(function () {
-                $(this).val("");
+        }
+    });
+
+    $('#parameters_button').bind('click', function () {
+        if (inputVideo && videoMode) {
+            param.style.display = "block";
+            $('.parameterSelect > input').each(function () {
+                $(this)[0].value= parameters[$(this)[0].name];
+                $(this)[0].oninput();
             });
         }
     });
 
+
+
     $('input[name="action_checkbox"]').change(function () {
         action = $('input[name="action_checkbox"]:checked')[0].id.toLowerCase();
         if (action == "washingdishes") {
+            $("#knife").css("display", "inline");
             $("#knife1").css("display", "inline");
+            $("#faucet").css("display", "inline");
             $("#faucet1").css("display", "inline");
         }
+    });
+    // hidden param
+    $('#param_button').bind('click', function () {
+        param.style.display = "none";
+
     });
 
     // hidden modal
@@ -81,7 +124,16 @@ $(function () {
         if (event.target == modal) {
             modal.style.display = "none";
         }
+        if (event.target == param) {
+            param.style.display = "none";
+        }
     };
+    $("#param_save").bind("click", function(){
+        $('.parameterSelect > input').each(function () {
+            parameters[$(this)[0].name] = $(this)[0].value;
+        });
+        param.style.display = "none";
+    })
 
     // save predicates
     $("#save").bind('click', function () {

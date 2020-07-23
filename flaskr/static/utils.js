@@ -1,163 +1,25 @@
 //enable/disable table rows
-function modal_checkbox_display(car, truck, person, bus, human, object) {
-    if (truck && person && car && bus) {
-        document.getElementById('row1').style.display = '';
-        document.getElementById('row2').style.display = '';
-        document.getElementById('row3').style.display = '';
-        document.getElementById('row4').style.display = '';
-        document.getElementById('row5').style.display = '';
-        document.getElementById('row6').style.display = '';
-        document.getElementById('row_val1').style.display = '';
-        document.getElementById('row_val2').style.display = '';
-        document.getElementById('row_val3').style.display = '';
-        document.getElementById('row_val4').style.display = '';
-        document.getElementById('row_val5').style.display = '';
-        document.getElementById('row_val6').style.display = '';
-    } else if (car && person) {
-        document.getElementById('row1').style.display = '';
-        document.getElementById('row2').style.display = '';
-        document.getElementById('row_val1').style.display = '';
-        document.getElementById('row_val2').style.display = '';
-        document.getElementById('row3').style.display = 'none';
-        document.getElementById('row4').style.display = 'none';
-        document.getElementById('row5').style.display = 'none';
-        document.getElementById('row6').style.display = 'none';
-        document.getElementById('row_val3').style.display = 'none';
-        document.getElementById('row_val4').style.display = 'none';
-        document.getElementById('row_val5').style.display = 'none';
-        document.getElementById('row_val6').style.display = 'none';
-    } else if (truck && person) {
-        document.getElementById('row1').style.display = '';
-        document.getElementById('row2').style.display = '';
-        document.getElementById('row_val1').style.display = '';
-        document.getElementById('row_val2').style.display = '';
-        document.getElementById('row3').style.display = 'none';
-        document.getElementById('row4').style.display = 'none';
-        document.getElementById('row5').style.display = 'none';
-        document.getElementById('row6').style.display = 'none';
-        document.getElementById('row_val3').style.display = 'none';
-        document.getElementById('row_val4').style.display = 'none';
-        document.getElementById('row_val5').style.display = 'none';
-        document.getElementById('row_val6').style.display = 'none';
-    } else if (car && truck) {
-        document.getElementById('row1').style.display = '';
-        document.getElementById('row2').style.display = '';
-        document.getElementById('row_val1').style.display = '';
-        document.getElementById('row_val2').style.display = '';
-        document.getElementById('row3').style.display = 'none';
-        document.getElementById('row4').style.display = 'none';
-        document.getElementById('row5').style.display = 'none';
-        document.getElementById('row6').style.display = 'none';
-        document.getElementById('row_val3').style.display = 'none';
-        document.getElementById('row_val4').style.display = 'none';
-        document.getElementById('row_val5').style.display = 'none';
-        document.getElementById('row_val6').style.display = 'none';
-    } else if (car && bus) {
-        document.getElementById('row1').style.display = '';
-        document.getElementById('row2').style.display = '';
-        document.getElementById('row_val1').style.display = '';
-        document.getElementById('row_val2').style.display = '';
-        document.getElementById('row3').style.display = 'none';
-        document.getElementById('row4').style.display = 'none';
-        document.getElementById('row5').style.display = 'none';
-        document.getElementById('row6').style.display = 'none';
-        document.getElementById('row_val3').style.display = 'none';
-        document.getElementById('row_val4').style.display = 'none';
-        document.getElementById('row_val5').style.display = 'none';
-        document.getElementById('row_val6').style.display = 'none';
-    } else if (human && object) {
-        document.getElementById('row1').style.display = '';
-        document.getElementById('row2').style.display = 'none';
-        document.getElementById('row3').style.display = 'none';
-        document.getElementById('row4').style.display = 'none';
-        document.getElementById('row5').style.display = 'none';
-        document.getElementById('row6').style.display = 'none';
-        document.getElementById('row_val1').style.display = '';
-        document.getElementById('row_val2').style.display = 'none';
-        document.getElementById('row_val3').style.display = 'none';
-        document.getElementById('row_val4').style.display = 'none';
-        document.getElementById('row_val5').style.display = 'none';
-        document.getElementById('row_val6').style.display = 'none';
-    } else {
-        document.getElementById('row1').style.display = 'none';
-        document.getElementById('row2').style.display = 'none';
-        document.getElementById('row3').style.display = 'none';
-        document.getElementById('row4').style.display = 'none';
-        document.getElementById('row5').style.display = 'none';
-        document.getElementById('row6').style.display = 'none';
-        document.getElementById('row_val1').style.display = 'none';
-        document.getElementById('row_val2').style.display = 'none';
-        document.getElementById('row_val3').style.display = 'none';
-        document.getElementById('row_val4').style.display = 'none';
-        document.getElementById('row_val5').style.display = 'none';
-        document.getElementById('row_val6').style.display = 'none';
-    }
-}
+function calculate_accuracy(fp_arr,tp_arr,fn_arr,tp_arr){
+    var precision, recall, f1, fp_rate;
 
-function modal_row_innertext(inputVideo, filter_type, car, truck, person, bus, human, object) {
-    if (inputVideo === "baseball clip") {
-        if (filter_type === "action") {
-            if (human && object) {
-                document.getElementById('row_val1').innerText = 'human THROW baseball';
-            }
-        }
-    } else if (inputVideo === "tennis clip") {
-        if (filter_type === "action") {
-            if (human && object) {
-                document.getElementById('row_val1').innerText = 'human KICK tennis ball';
-            }
-        }
-    } else if (inputVideo === "surfing clip") {
-        if (filter_type === "action") {
-            if (human && object) {
-                document.getElementById('row_val1').innerText = 'human RIDE surfboard';
-            }
-        }
-    } else if (inputVideo === "skate clip") {
-        if (filter_type === "action") {
-            if (human && object) {
-                document.getElementById('row_val1').innerText = 'human RIDE skateboard';
-            }
-        }
-    } else {
-        if (filter_type === 'localisation') {
-            if (car && truck && person) {
-                document.getElementById('row_val1').innerText = 'car LEFT TO A truck';
-                document.getElementById('row_val2').innerText = 'truck LEFT TO A car';
-                document.getElementById('row_val3').innerText = 'car LEFT TO A person';
-                document.getElementById('row_val4').innerText = 'person LEFT TO A car';
-                document.getElementById('row_val5').innerText = 'truck LEFT TO A person';
-                document.getElementById('row_val6').innerText = 'person LEFT TO A truck';
-            } else if (car && person) {
-                document.getElementById('row_val1').innerText = 'car LEFT TO A person';
-                document.getElementById('row_val2').innerText = 'person LEFT TO A car';
-            } else if (truck && person) {
-                document.getElementById('row_val1').innerText = 'truck LEFT TO A person';
-                document.getElementById('row_val2').innerText = 'person LEFT TO A truck';
-            } else if (truck && car) {
-                document.getElementById('row_val1').innerText = 'car LEFT TO A truck';
-                document.getElementById('row_val2').innerText = 'truck LEFT TO A car';
-            } else if (car && bus) {
-                document.getElementById('row_val1').innerText = 'car LEFT TO A bus';
-                document.getElementById('row_val2').innerText = 'car BEHIND car';
-            }
-        } else if (filter_type === "class count") {
-            if (car && bus) {
-                document.getElementById('row_val1').innerText = 'car > 1';
-                document.getElementById('row_val2').innerText = 'bus == 1';
-            } else if (car) {
-                document.getElementById('row_val1').innerText = 'car > 1';
-            } else if (bus) {
-                document.getElementById('row_val1').innerText = 'bus == 1';
-            }
-        } else if (filter_type === "action") {
-            if (human && object) {
-                document.getElementById('row_val1').innerText = 'human KICK smallBall';
-            }
-        }
-    }
-}
 
+if (sum(fp_arr) + sum(tp_arr)) == 0 or (sum(fn_arr) + sum(tp_arr)) == 0:
+precision, recall, f1, fp_rate = 0, 0, 0, 0
+else:
+precision = sum(tp_arr) / (sum(fp_arr) + sum(tp_arr))
+recall = sum(tp_arr) / (sum(fn_arr) + sum(tp_arr))
+if sum(fp_arr) + sum(tn_arr) == 0:
+    fp_rate = 0
+else:
+    fp_rate = sum(fp_arr) / (sum(fp_arr) + sum(tn_arr))
+if (precision + recall) == 0:
+f1 = 0
+else:
+f1 = 2 * precision * recall / (precision + recall)
+print("precision:%.5f, recall:%.5f, f1:%.5f, fp_rate:%.5f" % (precision, recall, f1, fp_rate))
+
+
+}
 //refresh frane
 function refresh(flag, ii, refreshInterval, inputVideo, results_id, predicates, bbox) {
 

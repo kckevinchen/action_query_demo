@@ -12,7 +12,6 @@ var barHeight = 300;
 //d3.v5
 function percentage(video, mode) {
     var id = "my_dataviz";
-    file = "static/results/washingDishes.csv";
     if (video === "washingDishesVideo" && mode === "fixed") {
         file = "static/results/washingDishes.csv";
     }
@@ -47,10 +46,10 @@ function percentage(video, mode) {
         .attr("transform", "translate(-10,0)rotate(-45)")
         .style("text-anchor", "end");
 
-        svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height + margin.top + 20).text("X axis title");
+        svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height + margin.top + 20).text("Score");
 
         // Y axis label:
-        svg.append("text").attr("text-anchor", "end").attr("transform", "rotate(-90)").attr("y", - margin.left + 20).attr("x", - margin.top).text("Y axis title");
+        svg.append("text").attr("text-anchor", "end").attr("transform", "rotate(-90)").attr("y", - margin.left + 20).attr("x", - margin.top).text("Metric");
         svg.selectAll("myRect")
             .data(data)
                 .enter()
