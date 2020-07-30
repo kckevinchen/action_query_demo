@@ -16,10 +16,14 @@ socket_io = SocketIO(app)
 # def get_accuracy():
 #     return jsonify()
 
-
+@app.route("/accuracy_bl", methods=['GET'])
 @app.route("/accuracy", methods=['GET'])
 def accuracy():
-    return jsonify()
+    video = (request.args.get("video",None))
+    window_size = float(request.args.get("window_size",None))
+    iou_threshold = float(request.args.get("iou_threshold",None))
+
+    return get_accuracy(video,iou_threshold,window_size)
 
 
 @app.route('/index', methods=["GET"])

@@ -118,7 +118,7 @@ def get_accuracy(video, iou_threshold, window_size):
     with open(file) as json_file:
         data = json.load(json_file)
         tp, fp, fn = get_tp_fp_fn(data["video"], data["cate"], data["video_info"],data["result_clips"], iou_threshold, data["od_window_size"], data["total_clips"])
-        print(tp, fp, fn)
+    return {"tp":tp,"fp":fp,"fn":fn}
 
 if __name__ == "__main__":
     get_accuracy("", 0.1,"")

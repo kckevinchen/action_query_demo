@@ -1,25 +1,5 @@
 //enable/disable table rows
-function calculate_accuracy(fp_arr,tp_arr,fn_arr,tp_arr){
-    var precision, recall, f1, fp_rate;
 
-
-if (sum(fp_arr) + sum(tp_arr)) == 0 or (sum(fn_arr) + sum(tp_arr)) == 0:
-precision, recall, f1, fp_rate = 0, 0, 0, 0
-else:
-precision = sum(tp_arr) / (sum(fp_arr) + sum(tp_arr))
-recall = sum(tp_arr) / (sum(fn_arr) + sum(tp_arr))
-if sum(fp_arr) + sum(tn_arr) == 0:
-    fp_rate = 0
-else:
-    fp_rate = sum(fp_arr) / (sum(fp_arr) + sum(tn_arr))
-if (precision + recall) == 0:
-f1 = 0
-else:
-f1 = 2 * precision * recall / (precision + recall)
-print("precision:%.5f, recall:%.5f, f1:%.5f, fp_rate:%.5f" % (precision, recall, f1, fp_rate))
-
-
-}
 //refresh frane
 function refresh(flag, ii, refreshInterval, inputVideo, results_id, predicates, bbox) {
 

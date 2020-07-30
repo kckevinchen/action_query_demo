@@ -39,9 +39,24 @@ function washingDishesUpdateLink(){
     var progress = washingDishes.currentTime / washingDishes.duration;
     if (progress === 1){
         $("#my_dataviz").css("display", "inline");
+        $(".slidercontainer").css("display", "block");
     }
     if(!washingDishes.paused) {
         setTimeout("washingDishesUpdateLink()", 500);
     }
 }
+
+
+function washingDishesBlUpdateLink(){
+    var washingDishes = document.getElementById("washingDishesVideo_bl");
+    var progress = washingDishes.currentTime / washingDishes.duration;
+    if (progress === 1){
+        $("#my_dataviz_bl").css("display", "inline");
+        $(".slidercontainer_bl").css("display", "block");
+    }
+    if(!washingDishes.paused) {
+        setTimeout("washingDishesBlUpdateLink()", 500);
+    }
+}
+
 

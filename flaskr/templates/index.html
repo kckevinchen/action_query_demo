@@ -21,7 +21,7 @@
     </head>
 
     <body
-        class="w3-content" style="max-width: 2000px; background-color: #d0cccc;">
+        class="w3-content" style="max-width: 2000px; background-color: #d7d6d8;">
         <!-- Modal -->
         <div class="modal fade w3-animate-opacity" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" style="width: 40%;">
@@ -53,9 +53,6 @@
                                 </form>
                         </div>
 
-
-
-
                         <p>
                             <b>
                                 <span style="font-size: medium;">Predicates</span>
@@ -64,42 +61,7 @@
                         <div class="row" style="margin-left: 5px; margin-bottom: 10px;">
                             <div class="col-md-12" id="predicate"></div>
                         </div>
-                        <!-- <div class="row" style="margin-left: 5px;">
-                            <table class="table table-striped" style="margin-top: 10px;">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Predicates</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th id="row1" scope="row" style="display: none;">1</th>
-                                        <td id="row_val1" style="display: none;">X</td>
-                                    </tr>
-                                    <tr>
-                                        <th id="row2" scope="row" style="display: none;">2</th>
-                                        <td id="row_val2" style="display: none;">X</td>
-                                    </tr>
-                                    <tr>
-                                        <th id="row3" scope="row" style="display: none;">3</th>
-                                        <td id="row_val3" style="display: none;">X</td>
-                                    </tr>
-                                    <tr>
-                                        <th id="row4" scope="row" style="display: none;">4</th>
-                                        <td id="row_val4" style="display: none;">X</td>
-                                    </tr>
-                                    <tr>
-                                        <th id="row5" scope="row" style="display: none;">5</th>
-                                        <td id="row_val5" style="display: none;">X</td>
-                                    </tr>
-                                    <tr>
-                                        <th id="row6" scope="row" style="display: none;">6</th>
-                                        <td id="row_val6" style="display: none;">X</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> -->
+                       
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="modal_button" class="btn btn-secondary" data-dismiss="modal">
@@ -166,23 +128,23 @@
 
 
             <div class="w3-large w3-text-grey" style="margin: 0% 1% 10% 0%;">
-                <a onclick="myAccFunc()" href="javascript:window.location.reload();" class="w3-button w3-block w3-blue w3-left-align">
+                <a onclick="myAccFunc()" href="javascript:window.location.reload();" class="w3-button w3-block w3-left-align" style="background-color: #52658f; color: #fff;">
                     <b>Online Model</b>
                     <i class="fa fa-caret-down"></i>
                 </a>
                 <br/>
-                <a onclick="myAccFunc()" href="javascript:window.location.reload();" class="w3-button w3-block w3-blue w3-left-align">
+                <a onclick="myAccFunc()" href="javascript:window.location.reload();" class="w3-button w3-block  w3-left-align" style="background-color: #52658f; color: #fff;">
                     <b>Offline Model</b>
                     <i class="fa fa-caret-down"></i>
                 </a>
                 <br/>
-                <a onclick="myAccFunc()" href="javascript:window.location.reload();" class="w3-button w3-block w3-blue w3-left-align">
+                <a onclick="myAccFunc()" href="javascript:window.location.reload();" class="w3-button w3-block w3-left-align" style="background-color: #52658f; color: #fff;">
                     <b>Demo Video</b>
                     <i class="fa fa-caret-down"></i>
                 </a>
                 <br/>
 
-                <a onclick="myAccFunc()" href="javascript:window.location.reload();" class="w3-button w3-block w3-blue w3-left-align">
+                <a onclick="myAccFunc()" href="javascript:window.location.reload();" class="w3-button w3-block w3-left-align" style="background-color: #52658f; color: #fff;">
                     <b>Architecture</b>
                     <i class="fa fa-caret-down"></i>
                 </a>
@@ -208,8 +170,9 @@
         </nav>
 
 
-        <div class="w3-main" style="margin-left: 350px; margin-right: 1%;">
-            <div class="w3-row w3-padding-16">
+        <div class="w3-main" id="Selection" style="margin-left: 350px; margin-right: 1%;display: none;">
+
+            <div class="w3-row w3-padding-32" style="margin-top: 5%;">
                 <div class="operation-penal w3-row w3-white" style="margin: 0% 5% 0% 5%; width: 90%">
                     <label class="operation-penal-label" style="font-size: medium;">
                         <b>Query Definition</b>
@@ -274,15 +237,54 @@
                 </div>
             </div>
 
-            <div class="w3-row w3-padding-16">
-                <div class="operation-penal w3-row w3-white" style="margin: 0% 5% 0% 5%; width: 90%;">
-                    <div class="w3-col s3 m3 l3" id="p_value">
-                        P value here
-                    </div>
-                    <div class="w3-col s1 m1 l1" style="border-left: 1px inset gray;height: 220px;">
-                    </div>
 
-                    <div class="w3-col s8 m8 l8">
+            <div class="w3-row w3-padding-32">
+                <div class="operation-penal w3-row w3-white" style="margin: 0% 5% 0% 5%; width: 90%">
+                    <label class="operation-penal-label" style="font-size: medium;">
+                        <b>Baseline Definition</b>
+                    </label>
+
+                    <div class="w3-row">
+                        <div class="w3-col s5 m5 l5">
+                            <p>
+                                <b>
+                                    <span style="font-size: small;">1. Display baseline</span>
+                                </b>
+                            </p>
+                            <div class="w3-container" id="radio_data">
+                                <div class="w3-half">
+                                    <input type="checkbox" id="display_baseline"/>
+                                    <label for="det">Yes</label>
+                                </div>
+                            </div>
+                        </div>
+                
+                            <div class="w3-col s4 m4 l4">
+                                <p>
+                                    <b>
+                                        <span style="font-size: small;">2. Clip critical</span>
+                                    </b>
+                                </p>
+                                <input type="range" min="1" max="10" value="5" step="1" class="slider" id="clip_k" name="clip_k"> 
+                                <span id="clip_k_text" name="clip_k" style=" vertical-align: top;"></span>
+                              </div>
+
+                              <div class="w3-col s3 m3 l3">
+                                <p>
+                                    <b>
+                                        <span style="font-size: small;">3. Frame critical</span>
+                                    </b>
+                                </p>
+                                <input type="range" min="1" max="10" value="5" step="1" class="slider" id="frame_k" name="frame_k"> 
+                                <span id="frame_k_text" name="window" style=" vertical-align: top;"></span>
+                              </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w3-row w3-padding-32">
+                <div class="operation-penal w3-row w3-white" style="margin: 0% 5% 0% 5%; width: 90%;">
+                
                         <b>
                             <span style="font-size: medium;">SQL Query</span>
                         </b>
@@ -299,16 +301,16 @@
                             </button>
                         </p>
                     </div>
-                    </div>
                 </div>
             </div>
+        </div>
 
-
-            <!-- Second Row -->
-            <div class="w3-row-padding w3-padding-16" style="height: 440px;">
-                <div class="w3-half w3-margin-bottom" style="height: 100%; padding-left: 20px;">
+        <div class="w3-main" id="Display" style="margin-left: 350px; margin-right: 1%; ">
+            <!-- Second Page -->
+            <div class="w3-row-padding w3-padding-32" style="height: 400px; margin-top: 30px;">
+                <div class="w3-third w3-margin-bottom" style="height: 100%; padding-left: 20px;">
                     <ul class="w3-ul w3-border w3-white w3-center" style="height: 100%;">
-                        <li class="w3-black w3-large">Mode</li>
+                        <li class="w3-large" style="background-color: #C18C5D;color: #fff">Mode</li>
                         <li class="w3-padding-16" style="height: 85%;">
                             <video id="washingDishesVideo" style="max-width: 100%; max-height: 100%;" onplaying="washingDishesUpdateLink()">
                                 <source src="./static/videos/washingDishes.mp4" type="video/mp4"/>
@@ -317,22 +319,84 @@
                     </ul>
                 </div>
 
-                <div class="w3-half w3-margin-bottom" style="height: 100%;">
-                    <ul class="w3-ul w3-light-grey w3-center" style="height: 100%;">
-                        <li class="w3-teal w3-large table-cell">Accuracy</li>
-                        <li class="w3-padding-4" style="min-height: 50px; padding-top: 15px;">
-                            <div class="slidecontainer" style = "display: none">
+                <div class="w3-third w3-margin-bottom" style="height: 100%;">
+                    <ul class="w3-ul w3-white w3-center" style="height: 100%;">
+                        <li class="w3-large table-cell" style="background-color: #ce796b;color: #fff">Accuracy</li>
+                        <li class="w3-padding-4 slidercontainer" style="min-height: 50px; padding-top: 15px;" style = "display: none;">
                                 IoU Threshold
-                                <input type="range" min="0.2" max="0.7" value="0.5" step="0.1" class="slider" id="IoU" name="iou"> 
+                                <input type="range" min="0.1" max="0.9" value="0.5" step="0.1" class="slider" id="IoU" name="iou"> 
                                 <span id="IoU_text" style=" vertical-align: top;"></span>
-                              </div>
                         </li>
                         <li class="w3-padding-4" style="min-height: 100px;">
-                            <div id="my_dataviz"></div>
+                            <div id="dataviz"></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom" style="height: 100%;">
+                    <ul class="w3-ul w3-border w3-white w3-center"  style="height: 100%;">
+                        <li class="w3-large" style="background-color: #CB997E;color: #fff;">Parameter</li>
+                        <li class="w3-padding-16 display_parameter" style="height: 85%;">
+                                <b>
+                                    <span style="font-size: medium;">P value</span>
+                                </b>
+                            <div style="padding-top: 1.5%; display: flex;justify-content: center;align-items: center;height: 150px;line-height: 150px;">
+                                <h1 id="display_p_text"></h1>
+                        </div>
                         </li>
                     </ul>
                 </div>
             </div>
-        </body>
+
+            <div class="w3-row-padding w3-padding-32" style="height: 400px;">
+                <div class="w3-third  w3-margin-bottom" style="height: 100%; padding-left: 20px;">
+                    <ul class="w3-ul w3-border w3-white w3-center" style="height: 100%;">
+                        <li class="w3-large" style="background-color: #C18C5D;color: #fff" >Baseline Mode</li>
+                        <li class="w3-padding-16" style="height: 85%;">
+                            <video id="washingDishesVideo_bl" style="max-width: 100%; max-height: 100%; display: none;" onplaying="washingDishesBlUpdateLink()">
+                                <source src="./static/videos/washingDishes.mp4" type="video/mp4"/>
+                            </video>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third  w3-margin-bottom" style="height: 100%;">
+                    <ul class="w3-ul w3-white w3-center" style="height: 100%;">
+                        <li class="w3-large table-cell" style="background-color: #ce796b; color: #fff;" >Baseline Accuracy</li>
+                        <li class="w3-padding-4 slidercontainer_bl" style="min-height: 50px; padding-top: 15px;" style = "display: none;">
+                                IoU Threshold
+                                <input type="range" min="0.1" max="0.9" value="0.5" step="0.1" class="slider" id="IoU_bl" name="iou_bl"> 
+                                <span id="IoU_bl_text" style=" vertical-align: top;"></span>
+                        </li>
+                        <li class="w3-padding-4" style="min-height: 100px;">
+                            <div id="dataviz_bl"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="w3-third w3-margin-bottom" style="height: 100%;">
+                    <ul class="w3-ul w3-border w3-white w3-center"  style="height: 100%; ">
+                        <li class="w3-large" style="background-color: #CB997E; color: #fff;">Parameter</li>
+                        <li class="w3-padding-16 display_parameter_bl" style="height: 40%;" >
+                                <b>
+                                    <span style="font-size: medium;">Clip K</span>
+                                </b>
+                            <div style="padding-top: 1.5%; display: flex;justify-content: center;align-items: center;">
+                                <h1 id="display_clip_k_text"></h1>
+                        </li>
+                        <li class="w3-padding-16 display_parameter_bl" style="height: 40%;">
+                            <b>
+                                <span style="font-size: medium;">Frame K</span>
+                            </b>
+                        <div style="padding-top: 1.5%; display: flex;justify-content: center;align-items: center;">
+                            <h1 id="display_frame_k_text"></h1>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="w3-row-padding w3-padding-16" style="padding-left: 85%;">
+                <button class="w3-button w3-hover-grey w3-round-large w3-xlarge" style="background-color: #31708f; color: #fff;" id="back_button">Go Back</button>
+            </div>
+        </div>
     </body>
 </html></body></html>
