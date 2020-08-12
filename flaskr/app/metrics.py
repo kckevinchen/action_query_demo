@@ -15,7 +15,7 @@ Four modes:
 """
 import json
 import os
-STATIC_PATH = "./app/static/"
+STATIC_PATH = "./static/"
 def get_iou(a, b):
     """ Get IOU of predicted frames and true labeled frames. """
     if len(set(a).union(set(b))) > 0:
@@ -113,8 +113,8 @@ def get_tp_fp_fn(video_, cate, video_info_, result_clips_, iou_threshold, od_win
     labeled_frames_all = get_labeled_frames_all(video_, video_info_, fps)
     return traditional_mode(iou_threshold, result_snippets_, labeled_snippets_)
 
-def get_accuracy(video, iou_threshold, window_size):
-    file = os.path.join(STATIC_PATH ,"washingDishes.json")
+def get_accuracy(path,video, iou_threshold, window_size):
+    file = os.path.join(STATIC_PATH , path,"result.json")
     with open(file) as json_file:
         data = json.load(json_file)
         tp, fp, fn = get_tp_fp_fn(data["video"], data["cate"], data["video_info"],data["result_clips"], iou_threshold, data["od_window_size"], data["total_clips"])

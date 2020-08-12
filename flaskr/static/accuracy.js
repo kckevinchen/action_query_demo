@@ -16,7 +16,7 @@ function display_data(data,is_base_line) {
         id = "dataviz_bl";
     }
     else{
-        id = id = "dataviz";
+        id = "dataviz";
     }
     d3.select("#" + id).select("svg").remove();
     var svg = d3.select("#" + id).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -38,7 +38,7 @@ function display_data(data,is_base_line) {
 
     svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x)).selectAll("text").style("text-anchor", "end");
 
-    svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height + margin.top-10).text("Metric");
+    svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height + margin.top-15).text("Metric");
 
     // Y axis label:
     svg.append("text").attr("text-anchor", "end").attr("transform", "rotate(-90)").attr("y", - margin.left + 20).attr("x", - margin.top).text("Score");

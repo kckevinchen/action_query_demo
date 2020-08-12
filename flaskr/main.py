@@ -4,6 +4,7 @@ from flask import Flask, render_template, jsonify, request
 from flask_socketio import SocketIO
 # from flaskr.app.utils import get_pred_bbox, get_pred_accuracy
 from app.metrics import get_accuracy
+from app.utils import get_p
 
 import os
 
@@ -20,10 +21,18 @@ socket_io = SocketIO(app)
 @app.route("/accuracy", methods=['GET'])
 def accuracy():
     video = (request.args.get("video",None))
+    path = (request.args.get("path",None))
     window_size = float(request.args.get("window_size",None))
     iou_threshold = float(request.args.get("iou_threshold",None))
 
-    return get_accuracy(video,iou_threshold,window_size)
+    return get_accuracy(path,video,iou_threshold,window_size)
+
+
+@app.route("/get_p", methods=['GET'])
+def p():
+    path = (request.args.get("path",None))
+
+    return get_p(path)
 
 
 @app.route('/index', methods=["GET"])

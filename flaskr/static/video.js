@@ -1,62 +1,101 @@
+var data;
+var static = "./static/";
 
 
-// // video update link
-// function tennisOptUpdateLink(){
-//     var tennis_opt = document.getElementById("tennis_opt");
-//     var progress = tennis_opt.currentTime / tennis_opt.duration;
-//     if (0 <= progress && progress < 0.167) {
-//         tennis_graph1();
-//     }
-//     if (0.167 <= progress && progress < 0.333) {
-//         tennis_graph2();
-//     }
-//     if (0.333 <= progress && progress < 0.5) {
-//         tennis_graph3();
-//     }
-//     if (0.5 <= progress && progress < 0.667) {
-//         tennis_graph4();
-//     }
-//     if (0.667 <= progress && progress < 0.833) {
-//         tennis_graph5();
-//     }
-//     if (0.833 <= progress && progress < 1.0) {
-//         tennis_graph6();
-//     }
-//     // Pop out performance for Optimization Mode
-//     if (progress === 1){
-//         tennis_graph7();
-//         $("#time").css("display", "inline");
-//         $("#my_dataviz").css("display", "inline");
-//     }
-//     if(!tennis_opt.paused) {
-//         setTimeout("tennisOptUpdateLink()", 100);
-//     }
-// }
 
-
-function washingDishesUpdateLink(){
-    var washingDishes = document.getElementById("washingDishesVideo");
-    var progress = washingDishes.currentTime / washingDishes.duration;
-    if (progress === 1){
-        $("#my_dataviz").css("display", "inline");
+function videoFixUpdateLink() {
+    var video = document.getElementById("video");
+    var progress = video.currentTime / video.duration;
+    if (progress === 1) {
+        $("#dataviz").css("display", "inline");
         $(".slidercontainer").css("display", "block");
     }
-    if(!washingDishes.paused) {
-        setTimeout("washingDishesUpdateLink()", 500);
+    if (! video.paused) {
+        setTimeout("videoFixUpdateLink()", 500);
+    }
+}
+
+function videoDynamicUpdateLink(e) {
+    var video = document.getElementById("video");
+    var progress = video.currentTime / video.duration;
+    progress = Math.round((progress + Number.EPSILON) * 100) / 100
+    if (progress in data) {
+        $("#display_p_text").html(data[progress]);
+
+    }
+    if (progress === 1) {
+        $("#dataviz").css("display", "inline");
+        $(".slidercontainer").css("display", "block");
+    }
+    if (! video.paused) {
+        setTimeout("videoDynamicUpdateLink()", 500);
     }
 }
 
 
-function washingDishesBlUpdateLink(){
-    var washingDishes = document.getElementById("washingDishesVideo_bl");
-    var progress = washingDishes.currentTime / washingDishes.duration;
-    if (progress === 1){
-        $("#my_dataviz_bl").css("display", "inline");
+function videoBlUpdateLink() {
+    var video = document.getElementById("video_bl");
+    var progress = video.currentTime / video.duration;
+    if (progress === 1) {
+        $("#dataviz_bl").css("display", "inline");
         $(".slidercontainer_bl").css("display", "block");
     }
-    if(!washingDishes.paused) {
-        setTimeout("washingDishesBlUpdateLink()", 500);
+    if (!video.paused) {
+        setTimeout("videoBlUpdateLink()", 500);
     }
 }
 
 
+function playDynamicVideo(path) {
+    var video = document.getElementById("video");
+    var src = path + "/video.mp4";
+    $("#video").html('<source src="' + static + src + '" type="video/mp4"></source>');
+    $("#Display").css("display", "block");
+    $("#Selection").css("display", "none");
+    $(".display_parameter").css("display", "block");
+    $("#video").css("display", "inline");
+
+    $.ajax({
+        url: "/get_p", type: "get", // send it through get method
+        data: {
+            path: path
+        },
+        success: function (response) {
+            data = response
+            $("#video").on("play", videoDynamicUpdateLink)
+            video.play();
+        }
+    });
+
+}
+
+
+function playFixVideo(path) {
+    var video = document.getElementById("video");
+    var src = path + "/video.mp4";
+    $("#video").html('<source src="' + static + src + '" type="video/mp4"></source>');
+    $("#Display").css("display", "block");
+    $("#Selection").css("display", "none");
+    $(".display_parameter").css("display", "block");
+    $("#video").css("display", "inline");
+
+    $("#video").on("play", () => {
+        videoFixUpdateLink();
+    })
+    video.play();
+
+}
+
+
+function playBlVideo(path) {
+    var video_bl = document.getElementById("video_bl");
+    var src = path + "/video.mp4";
+    $("#video_bl").html('<source src="' + static + src + '" type="video/mp4"></source>');
+    $("#video_bl").css("display", "inline");
+    $(".display_parameter_bl").css("display", "block");
+    $("#video_bl").on("play", () => {
+        videoBlUpdateLink();
+    })
+    video_bl.play();
+
+}
