@@ -192,15 +192,28 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 }
 
 /*performance and time */
-#my_dataviz{
-    display: none;
+
+#frame_crt_k_handle {
+    width: 2em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+    background-color: #2e6da4;
+    color:white;
 }
-#my_dataviz_bf{
-    display: none;
+
+#clip_crt_k_handle {
+    width: 2em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+    background-color: #2e6da4;
+    color:white;
 }
-#time{
-    display: none;
-}
-#time_bf{
-    display: none;
+.select_container{
+    width: 80%;
 }

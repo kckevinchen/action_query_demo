@@ -4,7 +4,7 @@ from flask import Flask, render_template, jsonify, request
 from flask_socketio import SocketIO
 # from flaskr.app.utils import get_pred_bbox, get_pred_accuracy
 from app.metrics import get_accuracy
-from app.utils import get_p
+from app.utils import get_p,get_flatten_data
 
 import os
 
@@ -26,6 +26,13 @@ def accuracy():
     iou_threshold = float(request.args.get("iou_threshold",None))
 
     return get_accuracy(path,video,iou_threshold,window_size)
+
+
+@app.route("/get_flatten", methods=['GET'])
+def flatten():
+    path = (request.args.get("path",None))
+
+    return get_flatten_data(path)
 
 
 @app.route("/get_p", methods=['GET'])
