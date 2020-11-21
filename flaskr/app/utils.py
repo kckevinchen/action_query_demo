@@ -75,9 +75,42 @@ def get_flatten_data(path):
                     video_array.append([snippet[1]+1,total_clips])
         
         video_total = total_clips/2
-
-        
-
-
-      
     return {"result":video_array,"index":critical_index,"total":total_clips,"video_total": video_total}
+
+
+def get_offline_rank(video,k):
+    if(video == "coffee_and_cigarettes"):
+        path = os.path.join(STATIC_PATH , "data", "coffee_and_cigarettes")
+    else:
+        path = os.path.join(STATIC_PATH , "data", "free_solo")
+    
+    result = {}
+
+    with open(os.path.join(path,"result.json")) as json_file:
+        with open(os.path.join(path,"score.json")) as score_file:
+            data = json.load(json_file)
+            scores = json.load(score_file)
+            for i in range(1,int(k)+1):
+                index = str(i)
+                result[i] = {}
+                result[i]["name"] =  data[index]
+                result[i]["score"] = round(scores[str(data[index])],2)
+                if(video == "coffee_and_cigarettes"):
+                    result[i]["path"] = os.path.join("coffee_and_cigarettes","{}.mp4".format(data[index]))
+                else:
+                    result[i]["path"] = os.path.join("free_solo","{}.mp4".format(data[index]))
+    print(result)
+    return result 
+
+
+
+def get_offline_query(video,k):
+    if(video == "coffee_and_cigarettes"):
+        f = os.path.join(STATIC_PATH , "data", "coffee_and_cigarettes","query_process_{}.json".format(k))
+    else:
+        f = os.path.join(STATIC_PATH , "data", "free_solo","query_process_{}.json".format(k))
+    with open(f) as json_file:
+        data = json.load(json_file)
+    
+    return data
+

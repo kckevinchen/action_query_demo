@@ -4,7 +4,7 @@ from flask import Flask, render_template, jsonify, request
 from flask_socketio import SocketIO
 # from flaskr.app.utils import get_pred_bbox, get_pred_accuracy
 from app.metrics import get_accuracy
-from app.utils import get_p,get_flatten_data
+from app.utils import get_p,get_flatten_data,get_offline_rank,get_offline_query
 
 import os
 
@@ -34,6 +34,12 @@ def flatten():
 
     return get_flatten_data(path)
 
+@app.route("/get_se", methods=['GET'])
+def get_sequence():
+    video = (request.args.get("video",None))
+    k = (request.args.get("k",None))
+    return get_offline_rank(video,k)
+
 
 @app.route("/get_p", methods=['GET'])
 def p():
@@ -42,11 +48,21 @@ def p():
     return get_p(path)
 
 
-@app.route('/index', methods=["GET"])
+@app.route('/online', methods=["GET"])
 @app.route('/', methods=["GET"])
 def main():
     return render_template("index.html")
 
+@app.route('/offline', methods=["GET"])
+def offline():
+    return render_template("offline.html")
 
+@app.route('/get_query_process', methods=["GET"])
+def query_process():
+    video = (request.args.get("video",None))
+    k = (request.args.get("k",None))
+    return get_offline_query(video,k)
+
+# coffee_and_cigarettes
 if __name__ == '__main__':
     app.run(debug=True)

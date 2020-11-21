@@ -217,3 +217,38 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 .select_container{
     width: 80%;
 }
+
+.play-button {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0,0,0,0.25);
+    border-radius: 100%;
+    top: 50%;
+    left: 50%;
+    margin: -30px 0 0 -30px;
+    cursor: pointer;
+  }
+  
+.play-button:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 22px;
+    top: 10px;
+    border-width: 20px;
+    border-style: solid;
+    border-color: transparent transparent transparent white;
+  }
+  
+.play-button:hover {
+    background-color: black;
+  }
+textarea
+{
+    overflow-y:scroll;
+}
+a.disabled {
+    pointer-events: none;
+    color: #ccc;
+}
