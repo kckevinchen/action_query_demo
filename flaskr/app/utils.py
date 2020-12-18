@@ -5,6 +5,7 @@ import os
 STATIC_PATH = "./static/"
 
 
+
 def get_p(path):
     print(path)
     frame_file = os.path.join(STATIC_PATH , path,"frame_p.json")
@@ -44,20 +45,20 @@ def get_flatten_data(path):
     file = os.path.join(STATIC_PATH , path,"result.json")
     with open(file) as json_file:
         data = json.load(json_file)
-        result_clips_ = data["result_clips"]
-        od_window_size = int(data["od_window_size"])
-        total_clips = int(data["total_clips"])*od_window_size
-        result_clips_sorted = sorted(list(set(flatten(result_clips_))))
+        result_clips_ = sorted(data["result_clips"])
+        clip_size = int(data["clip_size"])
+        total_frames = int(data["total_clips"])*(10)
         result_frames_all = []
-        for clip in result_clips_sorted:
-            result_frames_all += [i + (clip - 1) * od_window_size for i in list(range(1, od_window_size + 1))]
+        for clip in result_clips_:
+            result_frames_all += [i + (clip - 1) * clip_size for i in list(range(1, clip_size + 1))]
         snippets  = [[ss[0], ss[-1]] for ss in get_result_snippets(result_frames_all)]
+        print(snippets)
         video_array = []
         critical_index = []
         base = 0
         video_total = 0
         if(len(snippets) == 0):
-            video_array.append([1,total_clips])
+            video_array.append([1,total_frames])
         else:
             if(snippets[0][0]>1):
                 video_array.append([1,snippets[0][0]-1])
@@ -71,16 +72,18 @@ def get_flatten_data(path):
                 video_array.append([snippet[1]+1,snippets[i][0]-1])
                 base += 1
             else:
-                if(snippet[1] < total_clips):
-                    video_array.append([snippet[1]+1,total_clips])
+                if(snippet[1] < total_frames):
+                    video_array.append([snippet[1]+1,total_frames])
         
-        video_total = total_clips/2
-    return {"result":video_array,"index":critical_index,"total":total_clips,"video_total": video_total}
+        video_total = total_frames/2
+    return {"result":video_array,"index":critical_index,"total":total_frames,"video_total": video_total}
 
 
 def get_offline_rank(video,k):
     if(video == "coffee_and_cigarettes"):
         path = os.path.join(STATIC_PATH , "data", "coffee_and_cigarettes")
+    elif(video == "the_fate_of_the_furious"):
+        path = os.path.join(STATIC_PATH , "data", "the_fate_of_the_furious")
     else:
         path = os.path.join(STATIC_PATH , "data", "free_solo")
     
@@ -97,6 +100,8 @@ def get_offline_rank(video,k):
                 result[i]["score"] = round(scores[str(data[index])],2)
                 if(video == "coffee_and_cigarettes"):
                     result[i]["path"] = os.path.join("coffee_and_cigarettes","{}.mp4".format(data[index]))
+                elif(video == "the_fate_of_the_furious"):
+                    result[i]["path"] = os.path.join("the_fate_of_the_furious","{}.mp4".format(data[index]))
                 else:
                     result[i]["path"] = os.path.join("free_solo","{}.mp4".format(data[index]))
     print(result)
@@ -107,6 +112,8 @@ def get_offline_rank(video,k):
 def get_offline_query(video,k):
     if(video == "coffee_and_cigarettes"):
         f = os.path.join(STATIC_PATH , "data", "coffee_and_cigarettes","query_process_{}.json".format(k))
+    elif(video == "the_fate_of_the_furious"):
+        f = os.path.join(STATIC_PATH , "data", "the_fate_of_the_furious","query_process_{}.json".format(k))
     else:
         f = os.path.join(STATIC_PATH , "data", "free_solo","query_process_{}.json".format(k))
     with open(f) as json_file:

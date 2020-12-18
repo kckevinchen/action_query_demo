@@ -24,7 +24,7 @@ $(function () {
     var parameters = {
         "frame_p": 0,
         "clip_p": 0,
-        "window": 0,
+        "clip_size": 0,
         "iou": 0
     };
     var parameters_bl = {
@@ -48,7 +48,7 @@ $(function () {
             data: {
                 path: path,
                 video: inputVideo,
-                window_size: parameters["window"],
+                window_size: parameters["clip_size"],
                 iou_threshold: parameters["iou"]
             },
             success: function (response) {
@@ -56,14 +56,15 @@ $(function () {
                 var sum = response["fn"] + response["fp"] + response["tp"];
                 var data = [
                     {
+                        "metric": "tp",
+                        "value": response["tp"] / sum
+                    },
+                    {
                         "metric": "fn",
                         "value": response["fn"] / sum
                     }, {
                         "metric": "fp",
                         "value": response["fp"] / sum
-                    }, {
-                        "metric": "tp",
-                        "value": response["tp"] / sum
                     }
                 ];
                 display_data(data, false);
@@ -88,7 +89,7 @@ $(function () {
             data: {
                 path: path_bl,
                 video: inputVideo,
-                window_size: parameters["window"],
+                window_size: parameters["clip_size"],
                 iou_threshold: parameters_bl["iou"]
             },
             success: function (response) {
@@ -96,14 +97,15 @@ $(function () {
                 var sum = response["fn"] + response["fp"] + response["tp"];
                 var data = [
                     {
+                        "metric": "tp",
+                        "value": response["tp"] / sum
+                    },
+                    {
                         "metric": "fn",
                         "value": response["fn"] / sum
                     }, {
                         "metric": "fp",
                         "value": response["fp"] / sum
-                    }, {
-                        "metric": "tp",
-                        "value": response["tp"] / sum
                     }
                 ];
                 display_data(data, true);
@@ -133,15 +135,16 @@ $(function () {
 
 
 
-    var window_slider = document.getElementById("window_size");
-    var window_output = document.getElementById("window_size_text");
-    parameters["window"] = window_slider.value;
+    var window_slider = document.getElementById("clip_size");
+    var window_output = document.getElementById("clip_size_text");
+    parameters["clip_size"] = window_slider.value;
     window_output.innerHTML = window_slider.value; // Display the default slider value
     window_slider.oninput = function () {
         window_output.innerHTML = this.value;
     }
 
-    var valMap = [1,5,10];
+    var action_map = [1,5,10];
+    var object_map = [1,10,50];
 
     // var frame_slider = document.getElementById("frame_crt_k");
     // var frame_output = document.getElementById("frame_crt_k_text");
@@ -162,29 +165,29 @@ $(function () {
     // }
     $("#frame_crt_k").slider({
            // min: 0,
-            max: valMap.length - 1,
+            max: object_map.length - 1,
             value:0,
             create: function() {
-                $( "#frame_crt_k_handle" ).text( valMap[0]);
-                parameters_bl["frame_crt_k"] = valMap[0];
+                $( "#frame_crt_k_handle" ).text( object_map[0]);
+                parameters_bl["frame_crt_k"] = object_map[0];
               },
             slide: function(event, ui) {
-                $( "#frame_crt_k_handle" ).text(valMap[ui.value]);
-                parameters_bl["frame_crt_k"] = valMap[ui.value];
+                $( "#frame_crt_k_handle" ).text(object_map[ui.value]);
+                parameters_bl["frame_crt_k"] = object_map[ui.value];
             }
     });
 
     $("#clip_crt_k").slider({
         // min: 0,
-         max: valMap.length - 1,
+         max: action_map.length - 1,
          value:0,
          create: function() {
-            $( "#clip_crt_k_handle" ).text( valMap[0] );
-            parameters_bl["clip_crt_k"] = valMap[0];
+            $( "#clip_crt_k_handle" ).text( action_map[0] );
+            parameters_bl["clip_crt_k"] = action_map[0];
            },
          slide: function(event, ui) {
-            $( "#clip_crt_k_handle" ).text(valMap[ui.value]);
-            parameters_bl["clip_crt_k"] = valMap[ui.value];
+            $( "#clip_crt_k_handle" ).text(action_map[ui.value]);
+            parameters_bl["clip_crt_k"] = action_map[ui.value];
 
          }
  });
@@ -264,11 +267,11 @@ $(function () {
                 parameters["frame_p"] = 0.01;
 
 
-                $("#window_size").attr('min', 10);
-                $("#window_size").attr('max', 20);
-                $("#window_size").attr('step', 5);
-                $("#window_size").val(15);
-                parameters["window"] = 15;
+                $("#clip_size").attr('min', 100);
+                $("#clip_size").attr('max', 200);
+                $("#clip_size").attr('step', 50);
+                $("#clip_size").val(150);
+                parameters["clip_size"] = 150;
 
                 $("#washingDishes").css("display", "inline");
                 $("#washingDishes1").css("display", "inline");
@@ -287,11 +290,11 @@ $(function () {
                 $("#select_frame_p").val(0.03)
                 parameters["frame_p"] = 0.03;
 
-                $("#window_size").attr('min', 5);
-                $("#window_size").attr('max', 15);
-                $("#window_size").attr('step', 5);
-                $("#window_size").val(10);
-                parameters["window"] = 10;
+                $("#clip_size").attr('min', 50);
+                $("#clip_size").attr('max', 150);
+                $("#clip_size").attr('step', 50);
+                $("#clip_size").val(100);
+                parameters["clip_size"] = 100;
 
 
                 $('#piano').css("display", "inline");
@@ -314,11 +317,11 @@ $(function () {
                 $("#select_frame_p").val(0.05);
                 parameters["frame_p"] = 0.05;
 
-                $("#window_size").attr('min',10);
-                $("#window_size").attr('max', 20);
-                $("#window_size").attr('step', 5);
-                $("#window_size").val(15);
-                parameters["window"] = 15;
+                $("#clip_size").attr('min',100);
+                $("#clip_size").attr('max', 200);
+                $("#clip_size").attr('step', 50);
+                $("#clip_size").val(150);
+                parameters["clip_size"] = 150;
 
                 $('#ridingabike').css("display", "inline");
                 $('#ridingabike1').css("display", "inline");
@@ -337,11 +340,11 @@ $(function () {
                 $("#select_frame_p").val(0.01)
                 parameters["frame_p"] = 0.01;
 
-                $("#window_size").attr('min', 5);
-                $("#window_size").attr('max', 15);
-                $("#window_size").attr('step', 5);
-                $("#window_size").val(10);
-                parameters["window"] = 10;
+                $("#clip_size").attr('min', 50);
+                $("#clip_size").attr('max', 150);
+                $("#clip_size").attr('step', 50);
+                $("#clip_size").val(100);
+                parameters["clip_size"] = 100;
 
 
                 $('#archery').css("display", "inline");
@@ -540,12 +543,12 @@ $(function () {
 
 
         if (videoMode === "fixed") {
-            path = path  + "/" + classes.concat(["fixed",parameters["window"],parameters["frame_p"],parameters["clip_p"]]).join("_");
+            path = path  + "/" + classes.concat(["fixed",parameters["clip_size"],parameters["frame_p"],parameters["clip_p"]]).join("_");
             path = path.replaceAll(" ","_");
             playFixVideo(path);
         }
         if(videoMode === "dynamic") {
-            path = path  + "/" + classes.concat(["dynamic",parameters["window"]]).join("_");
+            path = path  + "/" + classes.concat(["dynamic",parameters["clip_size"]]).join("_");
             path = path.replaceAll(" ","_");
             playDynamicVideo(path);
         }
@@ -570,21 +573,22 @@ $(function () {
             data: {
                 path: path,
                 video: inputVideo,
-                window_size: parameters["window"],
+                window_size: parameters["clip_size"],
                 iou_threshold: parameters["iou"]
             },
             success: function (response) {
                 var sum = response["fn"] + response["fp"] + response["tp"];
                 var data = [
                     {
+                        "metric": "tp",
+                        "value": response["tp"] / sum
+                    },
+                    {
                         "metric": "fn",
                         "value": response["fn"] / sum
                     }, {
                         "metric": "fp",
                         "value": response["fp"] / sum
-                    }, {
-                        "metric": "tp",
-                        "value": response["tp"] / sum
                     }
                 ];
                 display_data(data, false);
@@ -598,21 +602,22 @@ $(function () {
                 data: {
                     path: path_bl,
                     video: inputVideo,
-                    window_size: parameters["window"],
+                    window_size: parameters["clip_size"],
                     iou_threshold: parameters_bl["iou"]
                 },
                 success: function (response) {
                     var sum = response["fn"] + response["fp"] + response["tp"];
                     var data = [
                         {
+                            "metric": "tp",
+                            "value": response["tp"] / sum
+                        },
+                        {
                             "metric": "fn",
                             "value": response["fn"] / sum
                         }, {
                             "metric": "fp",
                             "value": response["fp"] / sum
-                        }, {
-                            "metric": "tp",
-                            "value": response["tp"] / sum
                         }
                     ];
                     display_data(data, true);

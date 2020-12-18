@@ -1,0 +1,1 @@
+{"video": "bike4", "cate": "Riding a bike", "video_info": {"bike4": {"fps": 30, "annotation": [{"segment": [16.333333333333332, 26.666666666666668], "label": "Riding a bike"}, {"segment": [37.0, 44.06666666666667], "label": "Riding a bike"}]}}, "result_clips": [6, 7, 8, 13, 14], "clip_size": 100, "total_clips": 195}

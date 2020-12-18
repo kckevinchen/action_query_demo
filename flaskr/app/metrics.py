@@ -73,6 +73,20 @@ def traditional_mode(iou_threshold, result_snippet_, labeled_snippet_):
     #     return 0, 0, 0
     return tp, fp, fn
 
+def improved_mode(iou_threshold, result_frames_all, result_snippets_, labeled_frames_all, labeled_snippets_):
+    tp, fp, fn = 0, 0, 0
+    for ls in labeled_snippets_:  # [[...], ...]
+        if (len(set(result_frames_all).intersection(set(ls))) / len(set(ls))) >= iou_threshold:
+            tp += 1
+        else:
+            fn += 1
+    for rs in result_snippets_:
+        if (len(set(labeled_frames_all).intersection(set(rs))) / len(set(rs))) < iou_threshold:
+            fp += 1
+    return tp, fp, fn
+
+
+
 
 
 def flatten(x):
@@ -84,7 +98,7 @@ def flatten(x):
     return tmp
 
 
-def get_tp_fp_fn(video_, cate, video_info_, result_clips_, iou_threshold, od_window_size, total_clips):
+def get_tp_fp_fn(video_, cate, video_info_, result_clips_, iou_threshold, clip_size, total_clips):
     """
     Get the number of true positives, false positives, and false negatives
     Four modes:
@@ -103,20 +117,32 @@ def get_tp_fp_fn(video_, cate, video_info_, result_clips_, iou_threshold, od_win
     :param total_clips: total number of clips of this video
     :return: number of true positives, false positives, and false negatives
     """
-    result_clips_sorted = sorted(list(set(flatten(result_clips_))))
+    # result_clips_sorted = sorted(result_clips_)
+    # result_frames_all = []
+    # for clip in result_clips_sorted:
+    #     result_frames_all += [i + (clip - 1) * clip_size for i in list(range(1, clip_size + 1))]
+    # fps = video_info_[video_]['fps']
+    # result_snippets_ = get_result_snippets(result_frames_all)
+    # labeled_snippets_ = get_labeled_snippet(video_, cate, video_info_, fps)
+    # labeled_frames_all = get_labeled_frames_all(video_, video_info_, fps)
+    # return traditional_mode(iou_threshold, result_snippets_, labeled_snippets_)
+    
     result_frames_all = []
+    result_clips_sorted = sorted(result_clips_)
     for clip in result_clips_sorted:
-        result_frames_all += [i + (clip - 1) * od_window_size for i in list(range(1, od_window_size + 1))]
+        result_frames_all += [i + (clip - 1) * clip_size for i in list(range(1, clip_size + 1))]
+    # result_frames_all.sort()
     fps = video_info_[video_]['fps']
     result_snippets_ = get_result_snippets(result_frames_all)
     labeled_snippets_ = get_labeled_snippet(video_, cate, video_info_, fps)
     labeled_frames_all = get_labeled_frames_all(video_, video_info_, fps)
-    return traditional_mode(iou_threshold, result_snippets_, labeled_snippets_)
+    return improved_mode(iou_threshold, result_frames_all, result_snippets_,
+                                labeled_frames_all, labeled_snippets_, )
 
 def get_accuracy(path,video, iou_threshold, window_size):
     file = os.path.join(STATIC_PATH , path,"result.json")
     with open(file) as json_file:
         data = json.load(json_file)
-        tp, fp, fn = get_tp_fp_fn(data["video"], data["cate"], data["video_info"],data["result_clips"], iou_threshold, data["od_window_size"], data["total_clips"])
+        tp, fp, fn = get_tp_fp_fn(data["video"], data["cate"], data["video_info"],data["result_clips"], iou_threshold, data["clip_size"], data["total_clips"]//10)
     return {"tp":tp,"fp":fp,"fn":fn}
 

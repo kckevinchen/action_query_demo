@@ -2,7 +2,6 @@ var rec_length = 250;
 var rec_width = 30;
 var margin = 20;
 function setUpBar(data, process, bl) {
-    console.log(process);
     var video_array = data["result"]
     var index = data["index"]
     var total = data["total"]

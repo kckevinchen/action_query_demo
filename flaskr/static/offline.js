@@ -93,7 +93,7 @@ $(function () {
                 predicates = "Climbing the Cliff"
                 action = "climbing"
                 objects = ["cliff"]
-                $("#predicates").html("Climbing the Cliff")
+                $("#predicates").html("Climbing the cliff")
                 parameters["k"] = 1;
                 k_handle.text(1);
                 $("#sql_text").html(offline_sql(inputVideo, action, objects, parameters["k"]));
@@ -115,6 +115,33 @@ $(function () {
                     animate: true
                 });
                 break;
+            case("the_fate_of_the_furious"):
+                predicates = "Driving through traffic lights"
+                action = "driving a car"
+                objects = ["traffic light"]
+                $("#predicates").html("Driving through traffic lights")
+                parameters["k"] = 1;
+                k_handle.text(1);
+                $("#sql_text").html(offline_sql(inputVideo, action, objects, parameters["k"]));
+                $("#select_K").slider({
+                    range: "min",
+                    min: 1,
+                    max: 5,
+                    value:1,
+                    create: function () {
+                        parameters["k"] = $(this).slider("value");
+                        k_handle.text($(this).slider("value"));
+                        $("#sql_text").html(offline_sql(inputVideo, action, objects, parameters["k"]));
+                    },
+                    slide: function (event, ui) {
+                        parameters["k"] = ui.value;
+                        k_handle.text(ui.value);
+                        $("#sql_text").html(offline_sql(inputVideo, action, objects, parameters["k"]));
+                    },
+                    animate: true
+                });
+                break;
+                
             default:
                 console.log("Didn't match");
                 break;

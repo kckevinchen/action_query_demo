@@ -2,14 +2,14 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-var margin = {
+var score_margin = {
     top: 60,
     right: 50,
     bottom: 50,
     left: 50
 };
-var width = 400 - margin.left - margin.right;
-var height = 250 - margin.top - margin.bottom;
+var score_width = 400 - score_margin.left - score_margin.right;
+var score_height = 250 - score_margin.top - score_margin.bottom;
 var barWidth = 25;
 var barHeight = 300;
 
@@ -18,7 +18,7 @@ function draw_performnance_result(total,baseline,rounds) {
     var time = rounds*0.05
     var id = "display_performance"
     d3.select("#" + id).select("svg").remove();
-    var svg = d3.select("#" + id).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var svg = d3.select("#" + id).append("svg").attr("width", score_width + score_margin.left + score_margin.right).attr("height", score_height + score_margin.top + score_margin.bottom).append("g").attr("transform", "translate(" + score_margin.left + "," + score_margin.top + ")");
 
     // Add X axis
     // This is what is written on the Axis: from 0 to 100.range([height, 0]) // This is where the axis is placed: from 100 px to 800px.padding([0]) // Goes between 0 and 1. Default is 0
@@ -29,22 +29,22 @@ function draw_performnance_result(total,baseline,rounds) {
     var data = [{"model":"our model", "random_access":time},{"model":"baseline", "random_access":time*baseline/total}];
 
     // Add y axis
-    var y = d3.scaleLinear().range([height,0]).domain([0, d3.max(data, function(d) { return d.random_access; })]);
+    var y = d3.scaleLinear().range([score_height,0]).domain([0, d3.max(data, function(d) { return d.random_access; })]);
 
     // Add x axis
-    var x = d3.scaleBand().range([0, width]).padding(0.4).domain(data.map(d=>d.model));
+    var x = d3.scaleBand().range([0, score_width]).padding(0.4).domain(data.map(d=>d.model));
 
     svg.append("g").call(d3.axisLeft(y));
 
-    svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x)).selectAll("text").style("text-anchor", "end");
+    svg.append("g").attr("transform", "translate(0," + score_height + ")").call(d3.axisBottom(x)).selectAll("text").style("text-anchor", "end");
 
-    svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height + margin.top-15).text("Model");
+    svg.append("text").attr("text-anchor", "end").attr("x", score_width).attr("y", score_height + score_margin.top-15).text("Model");
 
     // Y axis label:
-    svg.append("text").attr("text-anchor", "end").attr("transform", "rotate(-90)").attr("y", - margin.left + 10).attr("x", - margin.top).text("Time");
+    svg.append("text").attr("text-anchor", "end").attr("transform", "rotate(-90)").attr("y", - score_margin.left + 10).attr("x", - score_margin.top).text("Time");
 
     svg.selectAll(".bar").data(data).enter().append("rect").attr("x", d=>x(d.model))
-    .attr("y", d=>y(d.random_access)).attr("width",  x.bandwidth()).attr("height", function(d) { return height - y(d.random_access); }).attr("fill", "#31708f")
+    .attr("y", d=>y(d.random_access)).attr("width",  x.bandwidth()).attr("height", function(d) { return score_height - y(d.random_access); }).attr("fill", "#31708f")
 }
 
 

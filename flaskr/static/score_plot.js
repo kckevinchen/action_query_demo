@@ -1,18 +1,16 @@
 var score_margin = {
-    top: 40,
+    top: 10,
     right: 40,
     bottom: 40,
-    left: 40
+    left: 60
 };
-var score_width = 480 - score_margin.left - score_margin.right;
-var score_height = 200 - score_margin.top - score_margin.bottom;
+var score_width = 600 - score_margin.left - score_margin.right;
+var score_height = 250 - score_margin.top - score_margin.bottom;
 
 
 function draw_score_plot(score,k, hightlight){
     var data = [];
     var color = {}
-    console.log(score)
-    console.log(hightlight)
     for(var i =1; i < k+1; i ++){
         data.push({"rank":i,"score":score[i]["score"]})
         if(i == hightlight){
@@ -36,7 +34,7 @@ function draw_score_plot(score,k, hightlight){
 
     svg.append("g").attr("transform", "translate(0," + score_height + ")").call(d3.axisBottom(x)).selectAll("text").style("text-anchor", "end");
 
-    svg.append("text").attr("text-anchor", "end").attr("x", score_width).attr("y", score_height + score_margin.top - 10 ).text("Rank");
+    svg.append("text").attr("text-anchor", "end").attr("x", score_width).attr("y", score_height + score_margin.top - 30 ).text("Rank");
 
     // Y axis label:
     svg.append("text").attr("text-anchor", "end").attr("transform", "rotate(-90)").attr("y", - score_margin.left + 10).attr("x", - score_margin.top).text("Score");
@@ -44,6 +42,7 @@ function draw_score_plot(score,k, hightlight){
     svg.selectAll(".bar").data(data).enter().append("rect").attr("x", d=>x(d.rank))
     .attr("y", d=>y(d.score)).attr("width",  x.bandwidth()).attr("height", function(d) { return score_height - y(d.score); }).attr("fill", function(d) { return color[d.rank];});
 
+    $("svg").css('margin',"auto");
 
 
 
