@@ -21,11 +21,11 @@ function queries_per_filter_predicates(videoMode, inputVideo, action, classes) {
     var query;
     if(classes.length == 0){
         query = `SELECT MERGE(clipID) AS Sequence, I1(${action}Detections) AS ${action}Indicator\nFROM (PROCESS ${inputVideo}` +
-       ` PRODUCE clipID, ${action}Detections USING ActionClassifier) \nWhere ${action}Indicator == 1`
+       ` PRODUCE clipID, ${action}Detections USING ActionClassifier) \nWHERE ${action}Indicator == 1`
     }
     else{
         query = `SELECT MERGE(clipID) AS Sequence, I1(${action}Detections) AS ${action}Indicator${classes.reduce(setUpIndicator,["",2])[0]}\nFROM (PROCESS ${inputVideo}` +
-        ` PRODUCE clipID${classes.reduce(setUpDetections,"")} USING ObjectDetector, ${action}Detections USING ActionClassifier) \nWhere ${action}Indicator == 1${classes.reduce(setUpWhere,"")}`
+        ` PRODUCE clipID${classes.reduce(setUpDetections,"")} USING ObjectDetector, ${action}Detections USING ActionClassifier) \nWHERE ${action}Indicator == 1${classes.reduce(setUpWhere,"")}`
     }
   
     return query;
