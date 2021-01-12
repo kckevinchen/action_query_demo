@@ -37,11 +37,11 @@ function videoDynamicUpdateLink(e) {
     progress = progress.toFixed(2);
     console.log(progress)
     if (progress in data["clip"]) {
-        $("#display_clip_p_text").html(data["clip"][progress]);
+        $("#display_clip_p_text").html(parseFloat(data["clip"][progress]).toFixed(4));
 
     }
     if (progress in data["frame"]) {
-        $("#display_frame_p_text").html(data["frame"][progress]);
+        $("#display_frame_p_text").html(parseFloat(data["frame"][progress]).toFixed(4));
     }
 
     if (progress == 1) {
