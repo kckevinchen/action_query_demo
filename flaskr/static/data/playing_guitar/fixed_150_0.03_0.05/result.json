@@ -1,1 +1,0 @@
-{"video": "guitar_piano", "cate": "Playing guitar", "video_info": {"guitar_piano": {"fps": 30, "annotation": [{"segment": [0.03333333333333333, 21.933333333333334], "label": "Playing guitar"}, {"segment": [39.06666666666667, 47.4], "label": "Playing guitar"}]}}, "result_clips": [1, 2, 3, 4, 5, 9], "clip_size": 150, "total_clips": 142}
