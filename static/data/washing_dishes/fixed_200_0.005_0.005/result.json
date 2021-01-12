@@ -1,0 +1,1 @@
+{"video": "washDish_washHand1", "cate": "Washing dishes", "video_info": {"washDish_washHand1": {"fps": 30, "annotation": [{"segment": [0.6666666666666666, 9.566666666666666], "label": "Washing dishes"}, {"segment": [19.333333333333332, 46.96666666666667], "label": "Washing dishes"}]}}, "result_clips": [1, 2, 4, 5, 6, 7], "clip_size": 200, "total_clips": 140}

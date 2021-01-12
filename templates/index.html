@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SVQ-ACT</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <!--    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+    <script src="https://d3js.org/d3.v5.min.js"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/jquery-ui.min.css">
+    <script src="../static/external/jquery/jquery.js"></script>
+    <script src="../static/jquery-ui.min.js"></script>
+    <script src="../static/jquery-ui.js"></script>
+    <link rel="stylesheet" href="../static/w3.css" />
+    <link rel="stylesheet" href="../static/modal.css" />
+    <link rel="stylesheet" href="../static/responsive.css" />
+    <script type="text/javascript" src="../static/barchart.js"></script>
+    <script type="text/javascript" src="../static/box.js"></script>
+    <!-- <script src="../static/chart.js"></script> -->
+    <script type="text/javascript" src="../static/accuracy.js"></script>
+    <script type="text/javascript" src="../static/video.js"></script>
+    <script type="text/javascript" src="../static/utils.js"></script>
+    <script type="text/javascript" src="../static/index.js"></script>
+</head>
+
+<body class="w3-content" style="max-width: 2000px; background-color: #d7d6d8;">
+    <!-- Modal -->
+    <div class="modal fade w3-animate-opacity" id="exampleModalLong" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" style="width: 40%;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>
+                        <b>
+                            <span style="font-size: medium;">Action selection</span>
+                        </b>
+                    </p>
+                    <div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+                        <form class="modalform">
+                            <input id="washingDishes" class="modal_select action_select" type="radio"
+                                name="action_select" value="Washing Dishes" />
+                            <label id="washingDishes1" class="modal_select action_select" for="washingDishes">Washing
+                                Dishes</label>
+
+                            <input id="ridingabike" class="modal_select action_select" type="radio" name="action_select"
+                                value="Riding a Bike" />
+                            <label id="ridingabike1" class="modal_select action_select" for="ridingabike">Riding a
+                                Bike</label>
+
+
+                            <input id="piano" class="modal_select action_select" type="radio" name="action_select"
+                                value="Playing piano" />
+                            <label id="piano1" class="modal_select action_select" for="piano">Playing piano</label>
+
+                            <input id="guitar" class="modal_select action_select" type="radio" name="action_select"
+                                value="Playing guitar" />
+                            <label id="guitar1" class="modal_select action_select" for="guitar">Playing guitar</label>
+
+                            <input id="horse" class="modal_select action_select" type="radio" name="action_select"
+                                value="Horseback riding" />
+                            <label id="horse1" class="modal_select action_select" for="horse">Horseback riding</label>
+
+                            <input id="archery" class="modal_select action_select" type="radio" name="action_select"
+                                value="Archery" />
+                            <label id="archery1" class="modal_select action_select" for="archery">Archery</label>
+
+
+                        </form>
+                    </div>
+                    <p>
+                        <b>
+                            <span style="font-size: medium;">Class selection</span>
+                        </b>
+                    </p>
+                    <div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+                        <form class="modalform">
+                            <input id="knife" class="modal_select class_select" type="checkbox" name="class_checkbox"
+                                value="knife" />
+                            <label id="knife1" class="modal_select class_select" for="knife"
+                                style="margin-right: 10px;">Knife</label>
+
+                            <input id="glass" class="modal_select class_select" type="checkbox" name="class_checkbox"
+                                value="glass" />
+                            <label id="glass1" class="modal_select class_select" for="glass"
+                                style="margin-right: 10px;">Glass</label>
+
+                            <input id="traffic_light" class="modal_select class_select" type="checkbox"
+                                name="class_checkbox" value="traffic light" />
+                            <label id="traffic_light1" class="modal_select class_select" for="traffic_light"
+                                style="margin-right: 10px;">Traffic Light</label>
+
+                            <input id="car" class="modal_select class_select" type="checkbox" name="class_checkbox"
+                                value="car" />
+                            <label id="car1" class="modal_select class_select" for="car"
+                                style="margin-right: 10px;">Car</label>
+
+
+                            <input id="volleyball_class" class="modal_select class_select" type="checkbox"
+                                name="class_checkbox" value="volleyball" />
+                            <label id="volleyball_class1" class="modal_select class_select" for="volleyball_class"
+                                style="margin-right: 10px;">Volleyball</label>
+
+                            <input id="dog_class" class="modal_select class_select" type="checkbox"
+                                name="class_checkbox" value="dog" />
+                            <label id="dog_class1" class="modal_select class_select" for="dog_class"
+                                style="margin-right: 10px;">Dog</label>
+
+                            <!-- <input id="guitar_class" class="modal_select class_select" type="checkbox" name="class_checkbox" value="guitar"/>
+                                <label id="guitar_class1" class="modal_select class_select" for="guitar_class" style="margin-right: 10px;">Guitar</label>
+
+                                <input id="piano_class" class="modal_select class_select" type="checkbox" name="class_checkbox" value="piano"/>
+                                <label id="piano_class1" class="modal_select class_select" for="piano_class" style="margin-right: 10px;">Piano</label>
+
+                                <input id="archery_class" class="modal_select class_select" type="checkbox" name="class_checkbox" value="bow and arrow"/>
+                                <label id="archery_class1" class="modal_select class_select" for="archery_class" style="margin-right: 10px;">Bow and arrow</label>
+
+
+                                <input id="horse_class" class="modal_select class_select" type="checkbox" name="class_checkbox" value="horse"/>
+                                <label id="horse_class1" class="modal_select class_select" for="horse_class" style="margin-right: 10px;">Horse</label> -->
+
+
+                        </form>
+                    </div>
+
+                    <p>
+                        <b>
+                            <span style="font-size: medium;">Predicates</span>
+                        </b>
+                    </p>
+                    <div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+                        <div class="col-md-12" id="predicate"></div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="modal_button" class="btn btn-secondary" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" id="save" class="btn btn-primary">
+                        Save changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade w3-animate-opacity" id="parametersLong" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" style="width: 40%;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div id="select_frame_p_container" class="parameterSelect"
+                        style="margin-left: 5px; margin-bottom: 10px;">
+                        <p>
+                            <b>
+                                <span style="font-size: medium;">
+                                    Object p value</span>
+                            </b>
+                        </p>
+                        <input type="range" min="0.05" max="0.25" value="0.15" step="0.05" class="slider"
+                            id="select_frame_p" name="frame_p">
+                        <!-- <div class="slider" id="select_p" name="p"> </div> -->
+                        <span id="select_frame_p_text" name="p" style=" vertical-align: top;"></span>
+                    </div>
+                    <div id="select_clip_p_container" class="parameterSelect"
+                        style="margin-left: 5px; margin-bottom: 10px;">
+                        <p>
+                            <b>
+                                <span style="font-size: medium;">
+                                    Action p value</span>
+                            </b>
+                        </p>
+                        <input type="range" min="0.05" max="0.25" value="0.15" step="0.05" class="slider"
+                            id="select_clip_p" name="clip_p">
+                        <!-- <div class="slider" id="select_p" name="p"> </div> -->
+                        <span id="select_clip_p_text" name="p" style=" vertical-align: top;"></span>
+                    </div>
+
+                    <div class="parameterSelect" style="margin-left: 5px; margin-bottom: 10px;">
+                        <p>
+                            <b>
+                                <span style="font-size: medium;">
+                                    Clip size</span>
+                            </b>
+                        </p>
+                        <input type="range" min="10" max="30" value="20" step="10" class="slider" id="clip_size"
+                            name="clip">
+                        <span id="clip_size_text" name="clip" style=" vertical-align: top;"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="param_save" class="btn btn-primary">
+                    Save changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:400px" id="mySidebar">-->
+    <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index: 3; width: 350px;" id="mySidebar">
+        <div class="w3-container w3-display-container w3-padding-12" style="margin-top: 36px;">
+            <h1 class="w3-wide w3-center" style="letter-spacing: 4px;font-family: Arial, Helvetica, sans-serif;">
+                SVQ-ACT
+            </h1>
+        </div>
+
+
+        <div class="w3-large w3-text-grey" style="margin: 10% 1% 10% 0%;">
+            <a onclick="myAccFunc()" href="#" class="w3-btn w3-block w3-left-align"
+                style="background-color: #52658f; color: #fff;pointer-events: none;">
+                <b>Online Model</b>
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <br />
+            <a onclick="myAccFunc()" href="/offline" class="w3-button w3-block  w3-left-align"
+                style="background-color: #52658f; color: #fff;opacity: 0.3">
+                <b>Offline Model</b>
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <br />
+            <!-- <a onclick="myAccFunc()" href="javascript:window.location.reload();" class="w3-button w3-block w3-left-align" style="background-color: #52658f; color: #fff;">
+                    <b>Demo Video</b>
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <br/>
+
+                <a onclick="myAccFunc()" href="javascript:window.location.reload();" class="w3-button w3-block w3-left-align" style="background-color: #52658f; color: #fff;">
+                    <b>Architecture</b>
+                    <i class="fa fa-caret-down"></i>
+                </a> -->
+        </div>
+
+        <div class="w3-container w3-padding-32" style="margin: 0% 1% 0% 10%;">
+            <!--<i class="fa fa-fw fa-envelope"></i> Email: <br>-->
+            <a href="https://www.utoronto.ca/">
+                <img src="./static/icons/logo.png" style="width: 80%;" />
+            </a>
+
+            <div style="margin: 20px 20px 20px 20px;">
+                <span style="font-family: sans-serif; font-size: large;">
+                    <a href="mailto:drchao@cs.toronto.edu">Get in Touch</a>
+                </span>
+                <br />
+                <span style="font-family: sans-serif; font-size: large;">
+                    <a href="http://www.cs.toronto.edu/~xarchakos/svq.html">Link to SVQ</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="w3-main" id="Selection" style="margin-left: 350px; margin-right: 1%;display: block;">
+
+
+        <div class="w3-row w3-padding-32" style="margin-top: 5%;">
+            <div class="operation-penal w3-row w3-white" style="margin: 0% 5% 0% 5%; width: 90%">
+                <label class="operation-penal-label" style="font-size: medium;">
+                    <b>Query Definition</b>
+                </label>
+
+                <div class="w3-row">
+
+                    <div class="w3-col s5 m5 l5">
+                        <p>
+                            <b>
+                                <span style="font-size: small;">1. Select Video Source</span>
+                            </b>
+                        </p>
+                        <div class="w3-container" id="radio_data">
+                            <div class="w3-half">
+                                <input type="radio" id="wd" name="source" class="source" value="WashingDishesClip" />
+                                <label for="wd">Washing Dishes</label>
+                            </div>
+                            <div class="w3-half">
+                                <input type="radio" id="rb" name="source" class="source" value="RidingABikeClip" />
+                                <label for="rb">Cycling</label>
+                            </div>
+                            <div class="w3-half">
+                                <input type="radio" id="gp" name="source" class="source" value="GuitarandPianoClip" />
+                                <label for="gp">Guitar and Piano</label>
+                            </div>
+                            <div class="w3-half">
+                                <input type="radio" id="ha" name="source" class="source" value="HorseandArcheryClip" />
+                                <label for="ha">Horseback riding and Archery</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w3-col s3 m3 l3">
+                        <p>
+                            <b>
+                                <span style="font-size: small;">2. Select Mode</span>
+                            </b>
+                        </p>
+                        <div class="w3-container" id="radio_mode">
+                            <div class="w3-half">
+                                <input type="radio" id="dynamic" name="mode" value="Dynamic" />
+                                <label for="dynamic">Dynamic</label>
+                            </div>
+                            <div class="w3-half">
+                                <input type="radio" id="fixed" name="mode" value="fixed" />
+                                <label for="fixed">Fixed</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w3-col s2 m2 l2">
+                        <p>
+                            <b>
+                                <span style="font-size: small;">3. Select Predicates</span>
+                            </b>
+                        </p>
+                        <button id="predicates_button" type="button" class="w3-button hover w3-round-xlarge "
+                            data-toggle="modal" data-target="#exampleModalLong"
+                            style="visibility: visible;color:
+                                                                                                                                                                                                                                                             #fff;background-color: #31708f;border-color: #2e6da4; ">
+                            Select Predicates
+                        </button>
+                    </div>
+                    <div class="w3-col s2 m2 l2">
+                        <p>
+                            <b>
+                                <span style="font-size: small;">4. Select Parameters</span>
+                            </b>
+                        </p>
+                        <button id="parameters_button" type="button" class="w3-button hover w3-round-xlarge "
+                            data-toggle="modal" data-target="#exampleModalLong"
+                            style="visibility: visible;color:
+                                                                                                                                                                                                                                                             #fff;background-color: #31708f;border-color: #2e6da4; ">
+                            Select Parameters
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="w3-row w3-padding-32">
+            <div class="operation-penal w3-row w3-white" style="margin: 0% 5% 0% 5%; width: 90%">
+                <label class="operation-penal-label" style="font-size: medium;">
+                    <b>Baseline Definition</b>
+                </label>
+
+                <div class="w3-row">
+                    <div class="w3-col s4 m4 l4">
+                        <p>
+                            <b>
+                                <span style="font-size: small;">1. Display baseline</span>
+                            </b>
+                        </p>
+                        <div class="w3-container" id="radio_data">
+                            <div class="w3-half">
+                                <input type="checkbox" id="display_baseline" />
+                                <label for="det">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w3-col s4 m4 l4">
+                        <p>
+                            <b>
+                                <span style="font-size: small;">2.Object Critical K</span>
+                            </b>
+                        </p>
+                        <div class="slider" id="frame_crt_k" name="frame_crt__k" style="width:35%">
+                            <div id="frame_crt_k_handle" class="ui-slider-handle slider-handle"></div>
+                        </div>
+                    </div>
+
+                    <div class="w3-col s4 m4 l4" style="float: left;">
+                        <p>
+                            <b>
+                                <span style="font-size: small;">3.Action Critical K</span>
+                            </b>
+                        </p>
+                        <div class="slider" id="clip_crt_k" name="clip_crt_k" style="width:35%">
+                            <div id="clip_crt_k_handle" class="ui-slider-handle slider-handle"></div>
+                        </div>
+
+                        <!-- 
+                            <input
+                            type="range" min="0" max="2" value="0" step="1" class="slider" id="clip_crt_k" name="clip_k">
+                            <span id="clip_crt_k_text" name="k" style=" vertical-align: top;"></span> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="w3-row w3-padding-32">
+                <div class="operation-penal w3-row w3-white" style="margin: 0% 5% 0% 5%; width: 90%;">
+
+                    <b>
+                        <span style="font-size: medium;">SQL Query</span>
+                    </b>
+                    <div class="w3-container" style="padding-top: 1.5%;">
+                        <div class="w3-container" id="sql_div" style="padding-right: 0;">
+                            <textarea readonly class="w3-codespan" id="sql_text" rows="7"
+                                style="width: 95%; font-size: 14px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="w3-row m4 w3-center" id="sql_btn" style="width:20%;margin-left: 75%;">
+                        <p>
+                            <button id="run" class="w3-btn"
+                                style="color:#fff;background-color:#31708f;border-color:#2e6da4;width:100%">
+                                Run
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-main" id="Display" style="margin-left: 350px; margin-right: 1%; display: none;">
+        <!-- Second Page -->
+        <div class="w3-row-padding w3-padding-32" style="height: 400px; margin-top: 30px;">
+            <div class="w3-third w3-margin-bottom" style="height: 100%; padding-left: 20px;">
+                <ul class="w3-ul w3-border w3-white w3-center" style="height: 100%;">
+                    <li class="w3-large" style="background-color: #C18C5D;color: #fff">Result</li>
+                    <li class="w3-padding-16" style="height: 70%;">
+                        <video id="video" style="max-width: 100%; max-height: 100%;height: 100%;"></video>
+                    </li>
+                    <li>
+                        <canvas id="bar"></canvas>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="w3-third w3-margin-bottom" style="height: 100%;">
+                <ul class="w3-ul w3-white w3-center" style="height: 100%;">
+                    <li class="w3-large table-cell" style="background-color: #ce796b;color: #fff">Accuracy</li>
+                    <li class="w3-padding-4 slidercontainer" style="min-height: 50px; padding-top: 15px;"
+                        style="display: none;">
+                        IoU Threshold
+                        <input type="range" min="0.1" max="0.9" value="0.6" step="0.1" class="slider" id="IoU"
+                            name="iou">
+                        <span id="IoU_text" style=" vertical-align: top;"></span>
+                    </li>
+                    <li class="w3-padding-4" style="min-height: 100px;">
+                        <div id="dataviz"></div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="w3-third w3-margin-bottom" style="height: 100%;">
+                <ul class="w3-ul w3-border w3-white w3-center" style="height: 100%;">
+                    <li class="w3-large" style="background-color: #CB997E;color: #fff;">Parameter</li>
+                    <li class="w3-padding-16 display_parameter" style="height:40%;">
+                        <b>
+                            <span style="font-size: medium;">Object p value</span>
+                        </b>
+                        <div style="display: flex;justify-content: center;align-items: center;">
+                            <h1 id="display_frame_p_text"></h1>
+                        </div>
+                    </li>
+                    <li class="w3-padding-16 display_parameter" style="height: 40%;">
+                        <b>
+                            <span style="font-size: medium;">Action p value</span>
+                        </b>
+                        <div style="display: flex;justify-content: center;align-items: center;">
+                            <h1 id="display_clip_p_text"></h1>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="w3-row-padding w3-padding-32" style="height: 400px;">
+            <div class="w3-third  w3-margin-bottom" style="height: 100%; padding-left: 20px;">
+                <ul class="w3-ul w3-border w3-white w3-center" style="height: 100%;">
+                    <li class="w3-large" style="background-color: #C18C5D;color: #fff">Baseline Result</li>
+                    <li class="w3-padding-16" style="height: 70%;">
+                        <video id="video_bl" style="max-width: 100%; max-height: 100%; height: 100%;display: none;"></video>
+                    </li>
+                    <li>
+                        <canvas id="bar_bl"></canvas>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="w3-third  w3-margin-bottom" style="height: 100%;">
+                <ul class="w3-ul w3-white w3-center" style="height: 100%;">
+                    <li class="w3-large table-cell" style="background-color: #ce796b; color: #fff;">Baseline Accuracy
+                    </li>
+                    <li class="w3-padding-4 slidercontainer_bl" style="min-height: 50px; padding-top: 15px;"
+                        style="display: none;">
+                        IoU Threshold
+                        <input type="range" min="0.1" max="0.9" value="0.6" step="0.1" class="slider" id="IoU_bl"
+                            name="iou_bl">
+                        <span id="IoU_bl_text" style=" vertical-align: top;"></span>
+                    </li>
+                    <li class="w3-padding-4" style="min-height: 100px;">
+                        <div id="dataviz_bl"></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="w3-third w3-margin-bottom" style="height: 100%;">
+                <ul class="w3-ul w3-border w3-white w3-center" style="height: 100%; ">
+                    <li class="w3-large" style="background-color: #CB997E; color: #fff;">Parameter</li>
+                    <li class="w3-padding-16 display_parameter_bl" style="height: 40%;">
+                        <b>
+                            <span style="font-size: medium;">Object cirtical K</span>
+                        </b>
+                        <div style="display: flex;justify-content: center;align-items: center;">
+                            <h1 id="display_frame_k_text"></h1>
+                    </li>
+                    <li class="w3-padding-16 display_parameter_bl" style="height: 40%;">
+                        <b>
+                            <span style="font-size: medium;">Action cirtical K</span>
+                        </b>
+                        <div style="display: flex;justify-content: center;align-items: center;">
+                            <h1 id="display_clip_k_text"></h1>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="w3-row-padding w3-padding-16" style="padding-left: 85%;">
+            <button class="w3-button w3-hover-grey w3-round-large w3-xlarge"
+                style="background-color: #31708f; color: #fff;" id="back_button">Go Back</button>
+        </div>
+    </div>
+</body>
+</html>
