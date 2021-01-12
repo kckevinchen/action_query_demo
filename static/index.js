@@ -563,8 +563,8 @@ $(function () {
         }
         console.log(path);
 
-        $("#display_frame_p_text").html(parameters["frame_p"]);
-        $("#display_clip_p_text").html(parameters["clip_p"]);
+        $("#display_frame_p_text").html(parameters["frame_p"].toFixed(4));
+        $("#display_clip_p_text").html(parameters["clip_p"].toFixed(4));
 
 
         // display
