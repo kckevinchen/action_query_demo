@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve SVQ
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/home/sammy/myproject
+Environment="PATH=/home/action_query_demo/virt/bin"
+ExecStart=/home/sammy/action_query_demo/virt/bin/gunicorn --workers 1 --bind unix:action_query_demo.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
